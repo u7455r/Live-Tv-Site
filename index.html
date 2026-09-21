@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Live TV Ultra">
+
+<!-- PWA MANIFEST — GENERATED INSIDE THIS SINGLE FILE -->
+<script>
+(function(){
+const manifest={
+"name":"Bangla Live TV Ultra",
+"short_name":"Live TV Ultra",
+"description":"Bangla Live TV Ultra — Live TV, Sports, Cricket, Movies, News & Entertainment",
+"start_url":"./",
+"scope":"./",
+"display":"standalone",
+"orientation":"portrait-primary",
+"background_color":"#04060b",
+"theme_color":"#05070d",
+"prefer_related_applications":false,
+"icons":[{
+"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%2304060b'/%3E%3Crect x='60' y='80' width='392' height='300' rx='60' fill='%230c1424' stroke='%2300e5ff' stroke-width='15'/%3E%3Cpath d='M190 165L350 255L190 345Z' fill='%2300e5ff'/%3E%3Ccircle cx='395' cy='120' r='19' fill='%23ff3158'/%3E%3Ctext x='256' y='447' text-anchor='middle' font-family='Arial' font-size='43' font-weight='900' fill='white'%3ELIVE%3C/text%3E%3C/svg%3E",
+"sizes":"512x512",
+"type":"image/svg+xml",
+"purpose":"any maskable"
+}]
+};
+const blob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
+const url=URL.createObjectURL(blob);
+const link=document.createElement("link");
+link.rel="manifest";
+link.href=url;
+document.head.appendChild(link);
+})();
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2304060b'/%3E%3Cpath d='M35 25L78 50L35 75Z' fill='%2300e5ff'/%3E%3C/svg%3E">
+
+<title>Bangla Live TV Ultra</title>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+--bg:#04060b;
+--panel:#0b1220;
+--panel2:#101827;
+--text:#f8fafc;
+--muted:#91a0b7;
+--line:#ffffff12;
+--cyan:#00e5ff;
+--purple:#8b5cf6;
+--pink:#ff3d81;
+--green:#22c55e;
+background:
+radial-gradient(circle at 8% 0%,#164e6340,transparent 28%),
+radial-gradient(circle at 90% 8%,#581c8740,transparent 30%),
+var(--bg);
+color:var(--text);
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+}
+body.light{
+--bg:#eef2ff;
+--panel:#fff;
+--panel2:#f8fafc;
+--text:#111827;
+--muted:#64748b;
+--line:#0f172a16;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:active{transform:scale(.97)}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-thumb{background:#334155;border-radius:20px}
+
+/* HEADER */
+.header{
+position:sticky;
+top:0;
+z-index:1000;
+background:#05070de8;
+backdrop-filter:blur(22px);
+border-bottom:1px solid var(--line);
+}
+.nav{
+max-width:1600px;
+margin:auto;
+min-height:72px;
+padding:10px 18px;
+display:flex;
+align-items:center;
+gap:14px;
+}
+.logo{
+font-size:19px;
+font-weight:1000;
+white-space:nowrap;
+}
+.logo b{color:var(--cyan)}
+.live-dot{
+display:inline-block;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#ff1744;
+box-shadow:0 0 16px #ff1744;
+animation:pulse 1s infinite;
+}
+@keyframes pulse{
+50%{opacity:.3;transform:scale(.7)}
+}
+.search{
+flex:1;
+max-width:680px;
+margin:auto;
+position:relative;
+}
+.search input{
+width:100%;
+height:46px;
+padding:0 50px;
+border-radius:15px;
+border:1px solid var(--line);
+outline:0;
+background:#ffffff08;
+color:var(--text);
+}
+.search-icon{
+position:absolute;
+left:17px;
+top:10px;
+font-size:21px;
+}
+.nav-actions{
+display:flex;
+gap:7px;
+}
+.nav-btn{
+width:44px;
+height:44px;
+border:1px solid var(--line);
+border-radius:14px;
+background:#ffffff08;
+color:var(--text);
+}
+.install-nav{
+background:linear-gradient(135deg,#00e5ff,#7c3aed);
+color:white;
+font-weight:900;
+}
+
+/* HERO */
+.hero{
+max-width:1600px;
+margin:auto;
+padding:20px 18px 10px;
+}
+.hero-card{
+min-height:390px;
+border-radius:32px;
+overflow:hidden;
+position:relative;
+border:1px solid #ffffff12;
+background:
+radial-gradient(circle at 85% 35%,#7c3aed66,transparent 26%),
+radial-gradient(circle at 50% 80%,#00e5ff22,transparent 35%),
+linear-gradient(110deg,#020617,#0b1220cc);
+display:flex;
+align-items:center;
+padding:55px;
+}
+.hero-card:before{
+content:"";
+position:absolute;
+inset:-100px;
+background:conic-gradient(from 180deg,transparent,#00e5ff18,transparent,#8b5cf618,transparent);
+animation:heroSpin 15s linear infinite;
+}
+@keyframes heroSpin{to{transform:rotate(360deg)}}
+.hero-content{position:relative;z-index:2}
+.hero-label{
+color:#67e8f9;
+font-size:13px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:18px;
+}
+.hero h1{
+font-size:clamp(42px,7vw,90px);
+line-height:.9;
+font-weight:1000;
+letter-spacing:-4px;
+}
+.hero h1 span{
+background:linear-gradient(90deg,#00e5ff,#8b5cf6,#f472b6);
+-webkit-background-clip:text;
+color:transparent;
+}
+.hero p{
+max-width:700px;
+margin-top:22px;
+color:#b9c5d5;
+line-height:1.7;
+}
+.hero-buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:25px;
+}
+.btn{
+border:0;
+border-radius:14px;
+padding:13px 19px;
+font-weight:900;
+color:white;
+background:#ffffff0b;
+border:1px solid var(--line);
+}
+.btn.primary{
+background:linear-gradient(135deg,#00c6ff,#7c3aed);
+}
+.btn.red{
+background:linear-gradient(135deg,#ef4444,#ec4899);
+}
+
+/* STATS */
+.stats{
+max-width:1600px;
+margin:auto;
+padding:12px 18px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+.stat{
+padding:15px;
+border-radius:18px;
+background:#ffffff06;
+border:1px solid var(--line);
+}
+.stat b{
+font-size:22px;
+display:block;
+}
+.stat small{color:var(--muted)}
+
+/* MAIN */
+.container{
+max-width:1600px;
+margin:auto;
+padding:5px 18px 60px;
+}
+.categories{
+display:flex;
+gap:8px;
+overflow:auto;
+padding:15px 0 10px;
+scrollbar-width:none;
+}
+.categories::-webkit-scrollbar{display:none}
+.cat{
+white-space:nowrap;
+padding:10px 15px;
+border-radius:999px;
+background:#ffffff07;
+color:var(--muted);
+border:1px solid var(--line);
+font-weight:800;
+}
+.cat.active{
+background:var(--cyan);
+color:#001018;
+border-color:var(--cyan);
+}
+.toolbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin:15px 0;
+}
+.view-buttons{
+display:flex;
+gap:6px;
+}
+.view-btn{
+width:42px;
+height:40px;
+border-radius:12px;
+background:#ffffff08;
+color:var(--text);
+border:1px solid var(--line);
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(225px,1fr));
+gap:14px;
+}
+.grid.list{
+grid-template-columns:1fr;
+}
+.grid.list .card{
+display:flex;
+align-items:center;
+gap:15px;
+min-height:110px;
+}
+.grid.list .card-info{
+flex:1;
+}
+.card{
+position:relative;
+overflow:hidden;
+min-height:205px;
+padding:16px;
+border-radius:21px;
+background:linear-gradient(145deg,#101827,#070b13);
+border:1px solid var(--line);
+transition:.25s;
+}
+.card:hover{
+transform:translateY(-5px);
+border-color:#00e5ff55;
+box-shadow:0 20px 60px #0008;
+}
+.card-top{
+display:flex;
+justify-content:space-between;
+position:relative;
+z-index:2;
+}
+.channel-logo{
+width:62px;
+height:62px;
+border-radius:17px;
+display:grid;
+place-items:center;
+overflow:hidden;
+background:linear-gradient(135deg,#172554,#312e81);
+font-size:22px;
+font-weight:1000;
+}
+.channel-logo img{
+width:100%;
+height:100%;
+object-fit:contain;
+padding:5px;
+}
+.star{
+width:39px;
+height:39px;
+border-radius:12px;
+background:#ffffff08;
+border:1px solid var(--line);
+color:#facc15;
+font-size:20px;
+}
+.card h3{
+margin-top:18px;
+font-size:16px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.card p{
+font-size:12px;
+color:var(--muted);
+margin-top:5px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.badge{
+display:flex;
+align-items:center;
+gap:5px;
+font-size:10px;
+color:#86efac;
+margin-top:13px;
+}
+.play{
+width:100%;
+padding:10px;
+margin-top:12px;
+border-radius:12px;
+background:#ffffff08;
+border:1px solid var(--line);
+color:white;
+font-weight:900;
+}
+.empty{
+display:none;
+text-align:center;
+padding:80px 20px;
+color:var(--muted);
+}
+
+/* PLAYER */
+.player{
+position:fixed;
+inset:0;
+z-index:10000;
+display:none;
+background:#000;
+}
+.player.show{display:block}
+.player video{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
+}
+.player-head{
+position:absolute;
+z-index:5;
+left:0;
+right:0;
+top:0;
+height:70px;
+padding:10px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:linear-gradient(#000d,transparent);
+}
+.player-title{
+font-weight:1000;
+font-size:16px;
+}
+.player-tools{
+display:flex;
+gap:6px;
+}
+.player-tools button{
+width:43px;
+height:43px;
+border-radius:12px;
+background:#ffffff12;
+border:1px solid #ffffff15;
+color:white;
+}
+.loader{
+position:absolute;
+z-index:4;
+inset:0;
+display:grid;
+place-items:center;
+background:#000b;
+}
+.loader-box{text-align:center}
+.spinner{
+width:55px;
+height:55px;
+border:4px solid #ffffff15;
+border-top-color:#00e5ff;
+border-radius:50%;
+animation:loaderSpin .7s linear infinite;
+margin:auto auto 15px;
+}
+@keyframes loaderSpin{to{transform:rotate(360deg)}}
+.status{
+position:absolute;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+z-index:6;
+max-width:90%;
+padding:11px 16px;
+border-radius:14px;
+background:#05070de8;
+border:1px solid #ffffff12;
+font-size:12px;
+text-align:center;
+}
+
+/* INSTALL */
+.install-box{
+position:fixed;
+left:50%;
+bottom:18px;
+z-index:20000;
+width:min(94%,440px);
+padding:17px;
+border-radius:22px;
+background:#0b1220f7;
+backdrop-filter:blur(25px);
+border:1px solid #00e5ff55;
+box-shadow:0 20px 80px #000b;
+transform:translate(-50%,150%);
+transition:.4s;
+}
+.install-box.show{
+transform:translate(-50%,0);
+}
+.install-head{
+display:flex;
+align-items:center;
+gap:12px;
+}
+.install-icon{
+width:55px;
+height:55px;
+border-radius:16px;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#00e5ff,#7c3aed);
+font-size:28px;
+}
+.install-title{font-weight:1000}
+.install-sub{
+font-size:12px;
+color:#94a3b8;
+margin-top:3px;
+}
+.install-close{
+margin-left:auto;
+width:35px;
+height:35px;
+border-radius:10px;
+background:#ffffff0a;
+color:white;
+border:0;
+}
+.install-action{
+width:100%;
+margin-top:14px;
+padding:13px;
+border:0;
+border-radius:14px;
+background:linear-gradient(90deg,#00e5ff,#7c3aed);
+color:white;
+font-weight:1000;
+}
+
+/* DRAWER */
+.drawer{
+position:fixed;
+inset:0;
+z-index:15000;
+display:none;
+background:#0008;
+}
+.drawer.show{display:block}
+.drawer-panel{
+position:absolute;
+right:0;
+top:0;
+bottom:0;
+width:min(92%,390px);
+padding:22px;
+background:#080d17;
+border-left:1px solid var(--line);
+overflow:auto;
+}
+.drawer-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+.setting{
+padding:15px;
+border-radius:16px;
+background:#ffffff06;
+border:1px solid var(--line);
+margin-bottom:10px;
+}
+.setting button{
+margin-top:10px;
+padding:9px 12px;
+border-radius:10px;
+background:#ffffff0a;
+border:1px solid var(--line);
+color:white;
+}
+
+/* TOAST */
+.toast{
+position:fixed;
+left:50%;
+bottom:20px;
+z-index:30000;
+padding:12px 17px;
+border-radius:14px;
+background:#111827;
+border:1px solid var(--line);
+transform:translate(-50%,120px);
+transition:.3s;
+}
+.toast.show{
+transform:translate(-50%,0);
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+padding:40px 20px;
+color:#64748b;
+border-top:1px solid var(--line);
+line-height:1.8;
+}
+
+/* MOBILE */
+@media(max-width:800px){
+.nav{
+flex-wrap:wrap;
+padding:10px 12px;
+}
+.search{
+order:3;
+flex-basis:100%;
+}
+.hero{padding:12px}
+.hero-card{
+min-height:330px;
+padding:28px;
+}
+.hero h1{
+font-size:48px;
+letter-spacing:-2px;
+}
+.stats{
+padding:10px 12px;
+grid-template-columns:repeat(2,1fr);
+}
+.container{
+padding-left:12px;
+padding-right:12px;
+}
+.grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:9px;
+}
+.card{
+padding:12px;
+min-height:180px;
+}
+.channel-logo{
+width:50px;
+height:50px;
+}
+.card h3{font-size:14px}
+.toolbar{
+align-items:flex-start;
+flex-direction:column;
+}
+.view-buttons{display:none}
+.player-tools button{
+width:38px;
+height:38px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<nav class="nav">
+
+<div class="logo">
+<span class="live-dot"></span>
+BANGLA <b>LIVE TV</b> ULTRA
+</div>
+
+<div class="search">
+<span class="search-icon">⌕</span>
+<input id="search" placeholder="চ্যানেল, Sports, Cricket, Movie খুঁজুন...">
+</div>
+
+<div class="nav-actions">
+<button class="nav-btn install-nav" id="installNav">📲</button>
+<button class="nav-btn" id="themeBtn">🌙</button>
+<button class="nav-btn" id="menuBtn">☰</button>
+</div>
+
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-card">
+<div class="hero-content">
+
+<div class="hero-label">
+<span class="live-dot"></span>
+LIVE ENTERTAINMENT HUB
+</div>
+
+<h1>
+WATCH<br>
+<span>LIVE.</span><br>
+ANYTIME.
+</h1>
+
+<p>
+Live TV, Sports, Cricket, Movies, News & Entertainment —
+একটি premium streaming dashboard-এ।
+</p>
+
+<div class="hero-buttons">
+<button class="btn primary" onclick="scrollChannels()">▶ এখনই দেখুন</button>
+<button class="btn" onclick="setCategory('favorites')">❤️ My List</button>
+<button class="btn" onclick="installApp()">📲 Install App</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<b id="totalChannels">0</b>
+<small>📺 Total Channels</small>
+</div>
+
+<div class="stat">
+<b id="movieCount">0</b>
+<small>🎬 Movies</small>
+</div>
+
+<div class="stat">
+<b id="sportsCount">0</b>
+<small>⚽ Sports</small>
+</div>
+
+<div class="stat">
+<b id="favCount">0</b>
+<small>❤️ My List</small>
+</div>
+
+</section>
+
+<main class="container" id="channels">
+
+<div class="categories">
+
+<button class="cat active" data-cat="all">🔥 সব</button>
+<button class="cat" data-cat="bd">🇧🇩 বাংলাদেশ</button>
+<button class="cat" data-cat="sports">⚽ Sports</button>
+<button class="cat" data-cat="cricket">🏏 Cricket</button>
+<button class="cat" data-cat="movies">🎬 Movies</button>
+<button class="cat" data-cat="entertainment">🍿 Entertainment</button>
+<button class="cat" data-cat="news">📰 News</button>
+<button class="cat" data-cat="documentary">🌍 Documentary</button>
+<button class="cat" data-cat="favorites">❤️ Favorites</button>
+
+</div>
+
+<div class="toolbar">
+
+<div>
+<h2 id="sectionTitle">🔴 Live Channels</h2>
+<small id="count" style="color:var(--muted)">Loading...</small>
+</div>
+
+<div class="view-buttons">
+<button class="view-btn" onclick="setView('grid')">▦</button>
+<button class="view-btn" onclick="setView('list')">☷</button>
+</div>
+
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="empty" id="empty">
+<div style="font-size:55px">📺</div>
+<h2>কোনো channel পাওয়া যায়নি</h2>
+<p>Search অথবা অন্য category চেষ্টা করুন।</p>
+</div>
+
+</main>
+
+<footer class="footer">
+<b>Bangla Live TV Ultra</b><br>
+Live TV • Sports • Cricket • Movies • Entertainment<br>
+Public / authorized streams only
+</footer>
+
+
+<!-- PLAYER -->
+
+<div class="player" id="player">
+
+<div class="player-head">
+
+<div class="player-title" id="playerTitle">
+🔴 Live Channel
+</div>
+
+<div class="player-tools">
+<button onclick="previousChannel()">⏮</button>
+<button onclick="nextChannel()">⏭</button>
+<button onclick="retry()">🔄</button>
+<button onclick="shareCurrent()">📤</button>
+<button onclick="pip()">▣</button>
+<button onclick="fullscreen()">⛶</button>
+<button onclick="closePlayer()">✕</button>
+</div>
+
+</div>
+
+<video id="video" controls playsinline autoplay preload="auto"></video>
+
+<div class="loader" id="loader">
+
+<div class="loader-box">
+<div class="spinner"></div>
+<b id="loaderText">Connecting to live stream...</b>
+</div>
+
+</div>
+
+<div class="status" id="status">
+Preparing...
+</div>
+
+</div>
+
+
+<!-- INSTALL POPUP -->
+
+<div class="install-box" id="installBox">
+
+<div class="install-head">
+
+<div class="install-icon">📺</div>
+
+<div>
+<div class="install-title">Bangla Live TV Ultra</div>
+<div class="install-sub">ফোনে অ্যাপের মতো ব্যবহার করুন 🚀</div>
+</div>
+
+<button class="install-close" onclick="hideInstall()">✕</button>
+
+</div>
+
+<button class="install-action" onclick="installApp()">
+📲 INSTALL / ADD TO HOME SCREEN
+</button>
+
+<div id="iosHelp"
+style="display:none;margin-top:10px;font-size:12px;color:#94a3b8;line-height:1.6">
+Safari → Share → Add to Home Screen
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div class="drawer" id="drawer">
+
+<div class="drawer-panel">
+
+<div class="drawer-title">
+<h2>⚙️ Settings</h2>
+<button class="nav-btn" onclick="closeDrawer()">✕</button>
+</div>
+
+<div class="setting">
+<b>📲 Install App</b>
+<p style="color:#94a3b8;font-size:12px;margin-top:5px">
+Chrome compatible হলে Install option দেখাবে।
+</p>
+<button onclick="installApp()">Install</button>
+</div>
+
+<div class="setting">
+<b>❤️ Favorites</b>
+<br>
+<button onclick="setCategory('favorites');closeDrawer()">Open My List</button>
+</div>
+
+<div class="setting">
+<b>🗑️ Reset My List</b>
+<br>
+<button onclick="clearFavorites()">Clear Favorites</button>
+</div>
+
+<div class="setting">
+<b>📤 Export Favorites</b>
+<br>
+<button onclick="exportFavorites()">Export JSON</button>
+</div>
+
+<div class="setting">
+<b>📥 Import Favorites</b>
+<br>
+<input id="importFile" type="file" accept=".json" style="margin-top:10px;color:white;max-width:100%">
+</div>
+
+<div class="setting">
+<b>⌨️ Keyboard</b>
+<p style="color:#94a3b8;font-size:12px;line-height:1.7;margin-top:8px">
+Space = Play/Pause<br>
+← = Previous<br>
+→ = Next<br>
+N = Next Channel<br>
+P = Previous Channel<br>
+Esc = Close Player
+</p>
+</div>
+
+</div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   PUBLIC / AUTHORIZED PLAYLIST SOURCES
+   ========================================================= */
+
+const PLAYLISTS=[
+
+"https://iptv-org.github.io/iptv/categories/sports.m3u",
+
+"https://iptv-org.github.io/iptv/categories/cricket.m3u",
+
+"https://iptv-org.github.io/iptv/categories/movies.m3u",
+
+"https://iptv-org.github.io/iptv/categories/entertainment.m3u",
+
+"https://iptv-org.github.io/iptv/categories/news.m3u",
+
+"https://iptv-org.github.io/iptv/categories/documentary.m3u",
+
+"https://iptv-org.github.io/iptv/countries/bd.m3u"
+
+];
+
+let channels=[];
+let filtered=[];
+let currentChannel=null;
+let currentIndex=-1;
+let hls=null;
+let currentCategory="all";
+
+let favorites=JSON.parse(
+localStorage.getItem("bltu_favorites")||"[]"
+);
+
+let deferredInstallPrompt=null;
+
+const grid=document.getElementById("grid");
+const search=document.getElementById("search");
+const empty=document.getElementById("empty");
+const player=document.getElementById("player");
+const video=document.getElementById("video");
+const loader=document.getElementById("loader");
+const loaderText=document.getElementById("loaderText");
+const status=document.getElementById("status");
+const toast=document.getElementById("toast");
+
+
+/* TOAST */
+
+function toastMsg(message){
+
+toast.textContent=message;
+toast.classList.add("show");
+
+setTimeout(()=>{
+toast.classList.remove("show");
+},2300);
+
+}
+
+
+/* M3U PARSER */
+
+function parseM3U(text){
+
+const lines=text.split(/\r?\n/);
+const result=[];
+let info=null;
+
+for(let i=0;i<lines.length;i++){
+
+const line=lines[i].trim();
+
+if(line.startsWith("#EXTINF")){
+
+const comma=line.indexOf(",");
+
+const attrs=line.substring(0,comma);
+const name=line.substring(comma+1).trim();
+
+function attr(key){
+
+const regex=new RegExp(key+'="([^"]*)"');
+const match=regex.exec(attrs);
+
+return match?match[1]:"";
+
+}
+
+info={
+name:name||"Unknown Channel",
+logo:attr("tvg-logo"),
+country:attr("tvg-country"),
+group:attr("group-title"),
+language:attr("tvg-language")
+};
+
+}
+
+else if(
+info &&
+line &&
+!line.startsWith("#") &&
+/^https:\/\/.+/i.test(line)
+){
+
+result.push({
+...info,
+url:line
+});
+
+info=null;
+
+}
+
+}
+
+return result;
+
+}
+
+
+/* CATEGORY */
+
+function detectCategory(channel){
+
+const text=(
+channel.name+" "+
+channel.group+" "+
+channel.country+" "+
+channel.language
+).toLowerCase();
+
+if(/cricket|willow|icc|ipl/.test(text))
+return"cricket";
+
+if(/sport|football|soccer|tennis|golf|racing|formula|basket|fight|ufc/.test(text))
+return"sports";
+
+if(/movie|cinema|film|classic|horror|action/.test(text))
+return"movies";
+
+if(/news|breaking/.test(text))
+return"news";
+
+if(/documentary/.test(text))
+return"documentary";
+
+if(/entertainment|music|comedy|show|lifestyle/.test(text))
+return"entertainment";
+
+if(/bangladesh|bd|dhaka/.test(text))
+return"bd";
+
+return"entertainment";
+
+}
+
+
+/* LOAD */
+
+async function loadPlaylists(){
+
+let all=[];
+const seen=new Set();
+
+toastMsg("📡 Public channels loading...");
+
+for(const playlist of PLAYLISTS){
+
+try{
+
+const response=await fetch(
+playlist,
+{cache:"no-store"}
+);
+
+if(!response.ok)continue;
+
+const text=await response.text();
+
+const list=parseM3U(text);
+
+for(const channel of list){
+
+if(!seen.has(channel.url)){
+
+seen.add(channel.url);
+
+all.push({
+...channel,
+id:"ch_"+all.length,
+category:detectCategory(channel)
+});
+
+}
+
+}
+
+}catch(error){
+
+console.log("Playlist unavailable:",playlist);
+
+}
+
+}
+
+channels=all;
+
+updateStats();
+render();
+
+if(channels.length){
+
+toastMsg(
+"🔥 "+channels.length+" public channels loaded"
+);
+
+}
+
+}
+
+
+/* STATS */
+
+function updateStats(){
+
+document.getElementById("totalChannels").textContent=channels.length;
+
+document.getElementById("movieCount").textContent=
+channels.filter(x=>x.category==="movies").length;
+
+document.getElementById("sportsCount").textContent=
+channels.filter(x=>
+x.category==="sports"||
+x.category==="cricket"
+).length;
+
+document.getElementById("favCount").textContent=favorites.length;
+
+}
+
+
+/* ESCAPE */
+
+function escapeHTML(value=""){
+
+return String(value).replace(
+/[&<>"']/g,
+char=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[char])
+);
+
+}
+
+
+/* INITIALS */
+
+function initials(name){
+
+const parts=name
+.replace(/[^\w\s\u0980-\u09ff]/g,"")
+.split(/\s+/)
+.filter(Boolean);
+
+return parts.slice(0,2)
+.map(x=>x[0])
+.join("")
+.toUpperCase()||"TV";
+
+}
+
+
+/* RENDER */
+
+function render(){
+
+const query=search.value.toLowerCase().trim();
+
+filtered=channels.filter(channel=>{
+
+const text=(
+channel.name+" "+
+channel.group+" "+
+channel.country+" "+
+channel.language
+).toLowerCase();
+
+const searchOK=!query||text.includes(query);
+
+let categoryOK=true;
+
+if(currentCategory==="favorites"){
+
+categoryOK=favorites.includes(channel.id);
+
+}else if(currentCategory!=="all"){
+
+categoryOK=channel.category===currentCategory;
+
+}
+
+return searchOK&&categoryOK;
+
+});
+
+grid.innerHTML="";
+
+document.getElementById("count").textContent=
+filtered.length+" channels";
+
+filtered.slice(0,700).forEach(channel=>{
+
+const card=document.createElement("article");
+card.className="card";
+
+const favorite=favorites.includes(channel.id);
+
+card.innerHTML=`
+
+<div class="card-top">
+
+<div class="channel-logo">
+
+${
+channel.logo
+?
+`<img src="${escapeHTML(channel.logo)}"
+loading="lazy"
+onerror="this.style.display='none'">`
+:
+initials(channel.name)
+}
+
+</div>
+
+<button class="star">${favorite?"★":"☆"}</button>
+
+</div>
+
+<div class="card-info">
+
+<h3>${escapeHTML(channel.name)}</h3>
+
+<p>${escapeHTML(
+channel.group||channel.category||"Live TV"
+)}</p>
+
+<div class="badge">
+<span class="live-dot"></span>
+PUBLIC LIVE
+</div>
+
+<button class="play">
+▶ WATCH LIVE
+</button>
+
+</div>
+`;
+
+card.querySelector(".star").onclick=e=>{
+
+e.stopPropagation();
+toggleFavorite(channel.id);
+
+};
+
+card.querySelector(".play").onclick=()=>{
+playChannel(channel);
+};
+
+grid.appendChild(card);
+
+});
+
+empty.style.display=filtered.length?"none":"block";
+
+}
+
+
+/* FAVORITES */
+
+function toggleFavorite(id){
+
+if(favorites.includes(id)){
+
+favorites=favorites.filter(x=>x!==id);
+
+}else{
+
+favorites.push(id);
+
+}
+
+localStorage.setItem(
+"bltu_favorites",
+JSON.stringify(favorites)
+);
+
+updateStats();
+render();
+
+toastMsg(
+favorites.includes(id)
+?"❤️ Added to My List"
+:"💔 Removed from My List"
+);
+
+}
+
+
+function clearFavorites(){
+
+favorites=[];
+
+localStorage.setItem(
+"bltu_favorites",
+"[]"
+);
+
+updateStats();
+render();
+
+toastMsg("🗑️ My List cleared");
+
+}
+
+
+/* CATEGORY */
+
+function setCategory(category){
+
+currentCategory=category;
+
+document.querySelectorAll(".cat")
+.forEach(button=>{
+button.classList.toggle(
+"active",
+button.dataset.cat===category
+);
+});
+
+const titles={
+all:"🔴 Live Channels",
+bd:"🇧🇩 Bangladesh",
+sports:"⚽ Sports",
+cricket:"🏏 Cricket",
+movies:"🎬 Movies",
+entertainment:"🍿 Entertainment",
+news:"📰 News",
+documentary:"🌍 Documentary",
+favorites:"❤️ My List"
+};
+
+document.getElementById("sectionTitle").textContent=
+titles[category]||"Live Channels";
+
+render();
+
+scrollChannels();
+
+}
+
+document.querySelectorAll(".cat").forEach(button=>{
+button.addEventListener("click",()=>{
+setCategory(button.dataset.cat);
+});
+});
+
+search.addEventListener("input",render);
+
+
+/* PLAYER */
+
+async function playChannel(channel){
+
+currentChannel=channel;
+
+currentIndex=filtered.findIndex(
+x=>x.id===channel.id
+);
+
+player.classList.add("show");
+document.body.style.overflow="hidden";
+
+document.getElementById("playerTitle").textContent=
+"🔴 "+channel.name;
+
+loader.style.display="grid";
+loaderText.textContent="Connecting to live stream...";
+status.textContent="Loading...";
+
+if(hls){
+hls.destroy();
+hls=null;
+}
+
+video.pause();
+video.removeAttribute("src");
+video.load();
+
+const url=channel.url;
+
+if(video.canPlayType(
+"application/vnd.apple.mpegurl"
+)){
+
+video.src=url;
+
+video.onloadedmetadata=()=>{
+
+loader.style.display="none";
+status.textContent="🔴 LIVE";
+
+video.play().catch(()=>{});
+
+};
+
+video.onerror=()=>streamError();
+
+}
+
+else if(window.Hls&&Hls.isSupported()){
+
+hls=new Hls({
+enableWorker:true,
+lowLatencyMode:true,
+backBufferLength:30,
+maxBufferLength:20,
+maxMaxBufferLength:40,
+manifestLoadingTimeOut:10000,
+fragLoadingTimeOut:10000
+});
+
+hls.loadSource(url);
+hls.attachMedia(video);
+
+hls.on(
+Hls.Events.MANIFEST_PARSED,
+()=>{
+
+loader.style.display="none";
+status.textContent="🔴 LIVE";
+
+video.play().catch(()=>{});
+
+}
+);
+
+hls.on(
+Hls.Events.ERROR,
+(event,data)=>{
+
+if(data.fatal)
+streamError();
+
+}
+);
+
+}else{
+
+streamError(
+"এই browser HLS playback support করে না।"
+);
+
+}
+
+}
+
+
+/* ERROR */
+
+function streamError(message){
+
+loader.style.display="grid";
+
+loaderText.textContent="Stream unavailable";
+
+status.textContent=
+message||
+"Stream offline, expired, blocked অথবা browser/CORS restriction থাকতে পারে।";
+
+}
+
+
+/* CONTROLS */
+
+function retry(){
+
+if(currentChannel)
+playChannel(currentChannel);
+
+}
+
+function nextChannel(){
+
+if(!filtered.length)return;
+
+currentIndex=
+(currentIndex+1)%filtered.length;
+
+playChannel(filtered[currentIndex]);
+
+}
+
+function previousChannel(){
+
+if(!filtered.length)return;
+
+currentIndex=
+(currentIndex-1+filtered.length)%filtered.length;
+
+playChannel(filtered[currentIndex]);
+
+}
+
+function closePlayer(){
+
+player.classList.remove("show");
+
+document.body.style.overflow="";
+
+video.pause();
+
+if(hls){
+hls.destroy();
+hls=null;
+}
+
+video.removeAttribute("src");
+video.load();
+
+}
+
+function fullscreen(){
+
+if(document.fullscreenElement)
+document.exitFullscreen();
+else
+player.requestFullscreen?.();
+
+}
+
+async function pip(){
+
+try{
+
+if(document.pictureInPictureElement)
+await document.exitPictureInPicture();
+else
+await video.requestPictureInPicture();
+
+}catch(e){
+
+toastMsg("⚠️ PiP unavailable");
+
+}
+
+}
+
+
+/* SHARE */
+
+async function shareCurrent(){
+
+if(!currentChannel)return;
+
+try{
+
+await navigator.share({
+title:currentChannel.name,
+text:"Watch "+currentChannel.name+" on Bangla Live TV Ultra",
+url:location.href
+});
+
+}catch(e){
+
+try{
+
+await navigator.clipboard.writeText(location.href);
+toastMsg("🔗 Link copied");
+
+}catch(x){}
+
+}
+
+}
+
+
+/* VIEW */
+
+function setView(type){
+
+grid.classList.toggle("list",type==="list");
+
+localStorage.setItem("bltu_view",type);
+
+}
+
+setView(
+localStorage.getItem("bltu_view")||"grid"
+);
+
+
+/* THEME */
+
+document.getElementById("themeBtn").onclick=()=>{
+
+document.body.classList.toggle("light");
+
+const light=document.body.classList.contains("light");
+
+document.getElementById("themeBtn").textContent=
+light?"🌙":"☀️";
+
+localStorage.setItem(
+"bltu_theme",
+light?"light":"dark"
+);
+
+};
+
+if(localStorage.getItem("bltu_theme")==="light"){
+
+document.body.classList.add("light");
+
+document.getElementById("themeBtn").textContent="🌙";
+
+}
+
+
+/* DRAWER */
+
+document.getElementById("menuBtn").onclick=()=>{
+document.getElementById("drawer").classList.add("show");
+};
+
+function closeDrawer(){
+document.getElementById("drawer").classList.remove("show");
+}
+
+
+/* EXPORT */
+
+function exportFavorites(){
+
+const blob=new Blob(
+[
+JSON.stringify(favorites,null,2)
+],
+{type:"application/json"}
+);
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+a.download="bangla-live-favorites.json";
+a.click();
+
+URL.revokeObjectURL(url);
+
+toastMsg("📤 Favorites exported");
+
+}
+
+
+/* IMPORT */
+
+document.getElementById("importFile")
+.addEventListener("change",event=>{
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=()=>{
+
+try{
+
+const data=JSON.parse(reader.result);
+
+if(Array.isArray(data)){
+
+favorites=data;
+
+localStorage.setItem(
+"bltu_favorites",
+JSON.stringify(favorites)
+);
+
+updateStats();
+render();
+
+toastMsg("📥 Favorites imported");
+
+}
+
+}catch(e){
+
+toastMsg("❌ Invalid JSON");
+
+}
+
+};
+
+reader.readAsText(file);
+
+});
+
+
+/* =========================================================
+   INSTALL SYSTEM
+   ========================================================= */
+
+window.addEventListener(
+"beforeinstallprompt",
+event=>{
+
+event.preventDefault();
+
+deferredInstallPrompt=event;
+
+setTimeout(showInstall,2500);
+
+});
+
+
+async function installApp(){
+
+if(deferredInstallPrompt){
+
+deferredInstallPrompt.prompt();
+
+const result=
+await deferredInstallPrompt.userChoice;
+
+console.log(
+"Install result:",
+result.outcome
+);
+
+deferredInstallPrompt=null;
+
+hideInstall();
+
+return;
+
+}
+
+if(
+window.matchMedia("(display-mode: standalone)").matches
+){
+
+toastMsg("✅ App already installed");
+
+return;
+
+}
+
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
+
+toastMsg(
+"📱 Safari → Share → Add to Home Screen"
+);
+
+showInstall();
+
+return;
+
+}
+
+toastMsg(
+"📱 Chrome ⋮ → Install app / Add to Home screen"
+);
+
+showInstall();
+
+}
+
+
+function showInstall(){
+
+document.getElementById(
+"installBox"
+).classList.add("show");
+
+}
+
+
+function hideInstall(){
+
+document.getElementById(
+"installBox"
+).classList.remove("show");
+
+}
+
+
+document.getElementById("installNav")
+.onclick=installApp;
+
+
+window.addEventListener(
+"appinstalled",
+()=>{
+
+hideInstall();
+
+toastMsg(
+"🎉 Bangla Live TV Ultra installed!"
+);
+
+});
+
+
+/* iOS */
+
+if(
+/iphone|ipad|ipod/i.test(navigator.userAgent) &&
+!window.navigator.standalone
+){
+
+document.getElementById(
+"iosHelp"
+).style.display="block";
+
+setTimeout(showInstall,3000);
+
+}
+
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",event=>{
+
+if(event.key==="Escape"){
+
+if(player.classList.contains("show"))
+closePlayer();
+
+if(
+document.getElementById("drawer")
+.classList.contains("show")
+)
+closeDrawer();
+
+}
+
+if(
+event.key==="ArrowRight" &&
+player.classList.contains("show")
+)
+nextChannel();
+
+if(
+event.key==="ArrowLeft" &&
+player.classList.contains("show")
+)
+previousChannel();
+
+if(event.key==="n"||event.key==="N")
+nextChannel();
+
+if(event.key==="p"||event.key==="P")
+previousChannel();
+
+if(
+event.code==="Space" &&
+player.classList.contains("show")
+){
+
+event.preventDefault();
+
+video.paused?
+video.play():
+video.pause();
+
+}
+
+});
+
+
+/* SCROLL */
+
+function scrollChannels(){
+
+document.getElementById(
+"channels"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* START */
+
+loadPlaylists();
+
+</script>
+
+</body>
+</html>
