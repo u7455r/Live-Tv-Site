@@ -408,74 +408,6 @@ color:var(--muted);
 }
 
 
-/* BANGLADESH NEWS YOUTUBE */
-function renderYoutubeNews(){
-  if(!youtubeNewsGrid)return;
-  youtubeNewsGrid.innerHTML=BD_NEWS.map((item,index)=>`
-    <article class="bd-news-card">
-      <div class="bd-news-thumb">
-        <iframe
-          src="https://www.youtube.com/embed/${item.id}?playsinline=1&rel=0&hl=bn"
-          title="${escapeHTML(item.name)}"
-          loading="lazy"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
-      </div>
-      <div class="bd-news-info">
-        <h3>${escapeHTML(item.name)}</h3>
-        <p>🇧🇩 Bangladesh • YouTube Live</p>
-        <button class="bd-news-watch" onclick="playYoutubeNews(${index})">▶ FULL SCREEN LIVE</button>
-      </div>
-    </article>
-  `).join("");
-}
-
-function playYoutubeNews(index){
-  if(index<0 || index>=BD_NEWS.length)return;
-  currentYoutubeIndex=index;
-  const item=BD_NEWS[index];
-
-  player.classList.add("show");
-  document.body.style.overflow="hidden";
-  document.getElementById("playerTitle").textContent="🇧🇩 "+item.name;
-
-  if(hls){
-    hls.destroy();
-    hls=null;
-  }
-  video.pause();
-  video.removeAttribute("src");
-  video.load();
-
-  youtubeFrame.src=
-    "https://www.youtube.com/embed/"+item.id+
-    "?autoplay=1&playsinline=1&rel=0&hl=bn";
-
-  youtubeOverlay.classList.add("show");
-  loader.style.display="none";
-  status.textContent="🔴 YouTube LIVE";
-}
-
-function nextYoutubeNews(){
-  if(currentYoutubeIndex<0)return;
-  currentYoutubeIndex=(currentYoutubeIndex+1)%BD_NEWS.length;
-  playYoutubeNews(currentYoutubeIndex);
-}
-
-function previousYoutubeNews(){
-  if(currentYoutubeIndex<0)return;
-  currentYoutubeIndex=(currentYoutubeIndex-1+BD_NEWS.length)%BD_NEWS.length;
-  playYoutubeNews(currentYoutubeIndex);
-}
-
-function closeYoutubePlayer(){
-  youtubeOverlay.classList.remove("show");
-  youtubeFrame.src="";
-  currentYoutubeIndex=-1;
-  closePlayer();
-}
-
 /* PLAYER */
 .player{
 position:fixed;
@@ -832,6 +764,18 @@ width:38px;
 height:38px;
 }
 }
+
+/* BANGLADESH DIRECTORY */
+.bd-directory-section{margin:28px auto 10px;max-width:1180px;padding:0 16px}
+.bd-directory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:16px}
+.bd-directory-card{background:var(--card,#111827);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.bd-directory-card b{font-size:14px;line-height:1.35}
+.bd-directory-card small{color:var(--muted,#94a3b8);margin-top:7px}
+.bd-directory-card .dir-badge{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:.3px;color:#22c55e}
+@media(max-width:600px){.bd-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.bd-directory-card{padding:13px;min-height:98px}}
+
+/* USER REQUEST: NO LOADING OVERLAY */
+.loader{display:none!important}
 </style>
 </head>
 
@@ -925,6 +869,17 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
   <div class="bd-news-grid" id="youtubeNewsGrid"></div>
 </section>
 
+<!-- BANGLADESH CHANNEL DIRECTORY -->
+<section class="bd-directory-section" id="bdChannelDirectory">
+  <div class="bd-news-head">
+    <div>
+      <h2>🇧🇩 বাংলাদেশের ৬০+ চ্যানেল</h2>
+      <small>Channel directory • Live embeds are shown only where a verified/user-supplied live source is available</small>
+    </div>
+  </div>
+  <div class="bd-directory-grid" id="bdDirectoryGrid"></div>
+</section>
+
 <main class="container" id="channels">
 
 <div class="categories">
@@ -945,7 +900,7 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 
 <div>
 <h2 id="sectionTitle">🔴 Live Channels</h2>
-<small id="count" style="color:var(--muted)">Loading...</small>
+<small id="count" style="color:var(--muted)">Ready • channels will appear instantly</small>
 </div>
 
 <div class="view-buttons">
@@ -1178,6 +1133,153 @@ const BD_NEWS=[
   {id:"k387DxKx-5k",name:"🇧🇩 Bangladesh News Live 06"}
 ];
 
+/* BANGLADESH NEWS YOUTUBE */
+function renderYoutubeNews(){
+  if(!youtubeNewsGrid)return;
+  youtubeNewsGrid.innerHTML=BD_NEWS.map((item,index)=>`
+    <article class="bd-news-card">
+      <div class="bd-news-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/${item.id}?playsinline=1&rel=0&hl=bn"
+          title="${escapeHTML(item.name)}"
+          loading="lazy"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="bd-news-info">
+        <h3>${escapeHTML(item.name)}</h3>
+        <p>🇧🇩 Bangladesh • YouTube Live</p>
+        <button class="bd-news-watch" onclick="playYoutubeNews(${index})">▶ FULL SCREEN LIVE</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function playYoutubeNews(index){
+  if(index<0 || index>=BD_NEWS.length)return;
+  currentYoutubeIndex=index;
+  const item=BD_NEWS[index];
+
+  player.classList.add("show");
+  document.body.style.overflow="hidden";
+  document.getElementById("playerTitle").textContent="🇧🇩 "+item.name;
+
+  if(hls){
+    hls.destroy();
+    hls=null;
+  }
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+
+  youtubeFrame.src=
+    "https://www.youtube.com/embed/"+item.id+
+    "?autoplay=1&playsinline=1&rel=0&hl=bn";
+
+  youtubeOverlay.classList.add("show");
+  loader.style.display="none";
+  status.textContent="🔴 YouTube LIVE";
+}
+
+function nextYoutubeNews(){
+  if(currentYoutubeIndex<0)return;
+  currentYoutubeIndex=(currentYoutubeIndex+1)%BD_NEWS.length;
+  playYoutubeNews(currentYoutubeIndex);
+}
+
+function previousYoutubeNews(){
+  if(currentYoutubeIndex<0)return;
+  currentYoutubeIndex=(currentYoutubeIndex-1+BD_NEWS.length)%BD_NEWS.length;
+  playYoutubeNews(currentYoutubeIndex);
+}
+
+function closeYoutubePlayer(){
+  youtubeOverlay.classList.remove("show");
+  youtubeFrame.src="";
+  currentYoutubeIndex=-1;
+  closePlayer();
+}
+
+
+
+/* 60+ BANGLADESH CHANNEL DIRECTORY — names only, no invented stream URLs */
+const BD_DIRECTORY=[
+  'Bangladesh Television (BTV)',
+  'BTV Chattogram',
+  'BTV News',
+  'Sangsad Bangladesh Television',
+  'ATN Bangla',
+  'ATN News',
+  'Channel i',
+  'Channel 24',
+  'Channel 1',
+  'Ekushey Television',
+  'NTV',
+  'RTV',
+  'Boishakhi Television',
+  'Banglavision',
+  'Desh TV',
+  'My TV',
+  'Mohona TV',
+  'Bijoy TV',
+  'Maasranga Television',
+  'GTV',
+  'Asian TV',
+  'Deepto TV',
+  'SA TV',
+  'Ananda TV',
+  'Bangla TV',
+  'Channel 9',
+  'Global Television',
+  'Green TV',
+  'Nagorik TV',
+  'Duronto TV',
+  'T Sports',
+  'Gaan Bangla',
+  'Ekhon TV',
+  'Nexus Television',
+  'DBC News',
+  'Ekattor TV',
+  'Independent Television',
+  'Jamuna Television',
+  'News24',
+  'Somoy TV',
+  'Star News',
+  'Islamic TV',
+  'Channel S',
+  'Citizen TV',
+  'Titas TV',
+  'Resesa TV',
+  'ATV Bangladesh',
+  'Jadu Media TV',
+  'Channel 21',
+  'Channel 16',
+  'Diganta TV',
+  'BTV World',
+  'Channel i HD',
+  'RTV HD',
+  'Maasranga TV HD',
+  'GTV Sports',
+  'BTV Sports',
+  'BTV Chattogram News',
+  'Bangla Vision Online',
+  'NTV Online'
+];
+
+function renderBangladeshDirectory(){
+  const box=document.getElementById("bdDirectoryGrid");
+  if(!box)return;
+  box.innerHTML=BD_DIRECTORY.slice(0,60).map((name,i)=>`
+    <article class="bd-directory-card">
+      <b>🇧🇩 ${escapeHTML(name)}</b>
+      <small>Bangladesh Channel</small>
+      <div class="dir-badge">● DIRECTORY</div>
+    </article>
+  `).join("");
+}
+
+
 let currentYoutubeIndex=-1;
 
 
@@ -1298,63 +1400,59 @@ return"entertainment";
 
 async function loadPlaylists(){
 
-let all=[];
-const seen=new Set();
-
-toastMsg("📡 Public channels loading...");
-
-for(const playlist of PLAYLISTS){
+/* Never block the page with an endless loading state. */
+const CACHE_KEY="bltu_channels_cache_v3";
+const TIMEOUT=7000;
 
 try{
+  const cached=JSON.parse(localStorage.getItem(CACHE_KEY)||"[]");
+  if(Array.isArray(cached)&&cached.length){
+    channels=cached;
+    updateStats();
+    render();
+  }
+}catch(e){}
 
-const response=await fetch(
-playlist,
-{cache:"no-store"}
-);
+const fetchOne=async(url)=>{
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),TIMEOUT);
+  try{
+    const response=await fetch(url,{cache:"no-store",signal:controller.signal});
+    if(!response.ok)throw new Error("HTTP "+response.status);
+    return parseM3U(await response.text());
+  }finally{
+    clearTimeout(timer);
+  }
+};
 
-if(!response.ok)continue;
+const results=await Promise.allSettled(PLAYLISTS.map(fetchOne));
+const all=[];
+const seen=new Set();
 
-const text=await response.text();
-
-const list=parseM3U(text);
-
-for(const channel of list){
-
-if(!seen.has(channel.url)){
-
-seen.add(channel.url);
-
-all.push({
-...channel,
-id:"ch_"+all.length,
-category:detectCategory(channel)
-});
-
+for(const result of results){
+  if(result.status!=="fulfilled")continue;
+  for(const channel of result.value){
+    if(!channel.url||seen.has(channel.url))continue;
+    seen.add(channel.url);
+    all.push({
+      ...channel,
+      id:"ch_"+all.length,
+      category:detectCategory(channel)
+    });
+  }
 }
 
+if(all.length){
+  channels=all;
+  try{localStorage.setItem(CACHE_KEY,JSON.stringify(channels));}catch(e){}
+}else if(!channels.length){
+  channels=[];
 }
-
-}catch(error){
-
-console.log("Playlist unavailable:",playlist);
-
-}
-
-}
-
-channels=all;
 
 updateStats();
 render();
 
-if(channels.length){
-
-toastMsg(
-"🔥 "+channels.length+" public channels loaded"
-);
-
-}
-
+/* No loading message/toast is shown. */
 }
 
 
@@ -1630,7 +1728,7 @@ document.getElementById("playerTitle").textContent=
 
 loader.style.display="grid";
 loaderText.textContent="Connecting to live stream...";
-status.textContent="Loading...";
+status.textContent="Opening stream...";
 
 if(hls){
 hls.destroy();
@@ -2156,6 +2254,8 @@ behavior:"smooth"
 /* START */
 
 renderYoutubeNews();
+renderBangladeshDirectory();
+render();
 loadPlaylists();
 
 </script>
