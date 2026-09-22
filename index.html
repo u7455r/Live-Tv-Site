@@ -612,81 +612,8 @@ border-top:1px solid var(--line);
 line-height:1.8;
 }
 
-/* BANGLADESH YOUTUBE NEWS */
-.bd-news-section{
-max-width:1600px;
-margin:10px auto 0;
-padding:0 18px 10px;
-}
-.bd-news-head{
-display:flex;
-justify-content:space-between;
-align-items:end;
-gap:12px;
-margin:8px 0 14px;
-}
-.bd-news-head h2{font-size:24px;font-weight:1000}
-.bd-news-head p{font-size:12px;color:var(--muted);margin-top:4px}
-.bd-news-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:12px;
-}
-.bd-news-card{
-position:relative;
-overflow:hidden;
-min-height:190px;
-padding:16px;
-border-radius:20px;
-border:1px solid var(--line);
-background:
-radial-gradient(circle at 90% 10%,#ff315822,transparent 30%),
-linear-gradient(145deg,#0b1220,#111827);
-box-shadow:0 16px 40px #0004;
-}
-.bd-news-card h3{font-size:16px;margin:10px 0 6px}
-.bd-news-card p{font-size:12px;color:#94a3b8;line-height:1.5}
-.bd-news-play{
-margin-top:16px;
-width:100%;
-padding:11px 13px;
-border:0;
-border-radius:12px;
-background:linear-gradient(90deg,#ef4444,#ec4899);
-color:#fff;
-font-weight:1000;
-}
-.bd-news-live{
-display:inline-flex;
-align-items:center;
-gap:6px;
-font-size:11px;
-font-weight:900;
-color:#fda4af;
-}
-.bd-news-player{
-position:fixed;
-inset:0;
-z-index:25000;
-display:none;
-background:#020617f5;
-backdrop-filter:blur(18px);
-}
-.bd-news-player.show{display:flex;align-items:center;justify-content:center;padding:18px}
-.bd-news-player-box{width:min(1100px,100%);background:#080d17;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 100px #0009}
-.bd-news-player-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
-.bd-news-player-title{font-weight:1000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bd-news-player-actions{display:flex;gap:7px}
-.bd-news-player-actions button{width:40px;height:40px;border:1px solid var(--line);border-radius:12px;background:#ffffff0a;color:#fff}
-.bd-news-frame-wrap{aspect-ratio:16/9;background:#000}
-.bd-news-frame-wrap iframe{width:100%;height:100%;border:0;display:block}
-
 /* MOBILE */
 @media(max-width:800px){
-.bd-news-section{padding-left:12px;padding-right:12px}
-.bd-news-grid{grid-template-columns:1fr 1fr;gap:9px}
-.bd-news-card{min-height:175px;padding:12px}
-.bd-news-card h3{font-size:14px}
 .nav{
 flex-wrap:wrap;
 padding:10px 12px;
@@ -736,6 +663,31 @@ height:38px;
 }
 }
 </style>
+
+<style id="ultra-upgrade-css">
+/* ULTRA COUNTRY / WORLD FILTER */
+.extra-filters{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.extra-filters select{background:var(--card,#0b1020);color:var(--text,#fff);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;font-weight:700;outline:none}
+.world-note{margin:0 0 18px;padding:12px 14px;border:1px solid rgba(34,197,94,.18);border-radius:16px;background:rgba(34,197,94,.06);color:#a7f3d0;font-size:13px;line-height:1.6}
+.yt-section{margin:26px 0}
+.yt-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.yt-title h2{margin:0}
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.yt-card{background:var(--card,#0b1020);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.yt-thumb{aspect-ratio:16/9;background:#05070d;position:relative;display:grid;place-items:center;overflow:hidden}
+.yt-thumb img{width:100%;height:100%;object-fit:cover}
+.yt-play{position:absolute;width:54px;height:54px;border:0;border-radius:50%;background:#ff0000;color:#fff;font-size:22px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.4)}
+.yt-body{padding:13px}
+.yt-body b{display:block;margin-bottom:9px}
+.yt-watch{width:100%;border:0;border-radius:12px;padding:11px;background:#ef4444;color:white;font-weight:800;cursor:pointer}
+.yt-player-wrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;padding:18px}
+.yt-player-wrap.show{display:flex}
+.yt-player-box{width:min(1000px,100%);background:#05070d;border-radius:20px;overflow:hidden}
+.yt-player-top{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;color:#fff}
+.yt-frame{width:100%;aspect-ratio:16/9;border:0;display:block}
+@media(max-width:600px){.yt-grid{grid-template-columns:1fr 1fr}.yt-player-wrap{padding:8px}}
+</style>
+
 </head>
 
 <body>
@@ -816,16 +768,6 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 
 </section>
 
-<section class="bd-news-section" id="bdNewsLive">
-<div class="bd-news-head">
-<div>
-<h2>🇧🇩 বাংলাদেশের নিউজ লাইভ</h2>
-<p>তোমার দেওয়া ৬টি YouTube Live source — সরাসরি embedded player-এ</p>
-</div>
-</div>
-<div class="bd-news-grid" id="youtubeNewsGrid"></div>
-</section>
-
 <main class="container" id="channels">
 
 <div class="categories">
@@ -840,6 +782,35 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 <button class="cat" data-cat="documentary">🌍 Documentary</button>
 <button class="cat" data-cat="favorites">❤️ Favorites</button>
 
+</div>
+
+<div class="extra-filters">
+<select id="countryFilter" aria-label="Country filter">
+<option value="all">🌍 সব দেশ</option>
+<option value="Bangladesh">🇧🇩 Bangladesh</option>
+<option value="India">🇮🇳 India</option>
+<option value="Pakistan">🇵🇰 Pakistan</option>
+<option value="United States">🇺🇸 USA</option>
+<option value="United Kingdom">🇬🇧 UK</option>
+<option value="Saudi Arabia">🇸🇦 Saudi Arabia</option>
+<option value="United Arab Emirates">🇦🇪 UAE</option>
+<option value="Turkey">🇹🇷 Turkey</option>
+<option value="Malaysia">🇲🇾 Malaysia</option>
+<option value="Japan">🇯🇵 Japan</option>
+<option value="South Korea">🇰🇷 South Korea</option>
+<option value="Canada">🇨🇦 Canada</option>
+<option value="Australia">🇦🇺 Australia</option>
+</select>
+<select id="sourceFilter" aria-label="Source filter">
+<option value="all">📡 সব Public Source</option>
+<option value="world">🌎 World TV</option>
+<option value="countries">🗺️ Country TV</option>
+<option value="categories">📺 Category TV</option>
+</select>
+</div>
+
+<div class="world-note">
+💡 <b>Public / authorized streams:</b> কিছু stream offline, CORS-blocked, geo-restricted বা embed-disabled হতে পারে। এমন হলে অন্য channel চেষ্টা করুন।
 </div>
 
 <div class="toolbar">
@@ -866,31 +837,24 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 
 </main>
 
+
+<section class="yt-section" id="bdNewsLive">
+  <div class="yt-title">
+    <h2>🇧🇩 বাংলাদেশ নিউজ — YouTube Live</h2>
+    <small style="color:var(--muted)">Official/public embed sources</small>
+  </div>
+  <div class="yt-grid" id="youtubeNewsGrid"></div>
+</section>
+
 <footer class="footer">
 <b>Bangla Live TV Ultra</b><br>
 Live TV • Sports • Cricket • Movies • Entertainment<br>
-Public / authorized streams only<br><br>
-<b>DEVELOPER MD RAFIM HOSSEN</b>
+Public / authorized streams only<br><b>DEVELOPER MD RAFIM HOSSEN</b>
 </footer>
 
-<!-- BANGLADESH YOUTUBE PLAYER -->
-<div class="bd-news-player" id="bdNewsPlayer">
-<div class="bd-news-player-box">
-<div class="bd-news-player-head">
-<div class="bd-news-player-title" id="bdNewsPlayerTitle">🇧🇩 Bangladesh News Live</div>
-<div class="bd-news-player-actions">
-<button onclick="previousYoutubeNews()">⏮</button>
-<button onclick="nextYoutubeNews()">⏭</button>
-<button onclick="closeYoutubePlayer()">✕</button>
-</div>
-</div>
-<div class="bd-news-frame-wrap">
-<iframe id="bdNewsFrame" title="Bangladesh News Live" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-</div>
-</div>
-</div>
 
 <!-- PLAYER -->
+
 <div class="player" id="player">
 
 <div class="player-head">
@@ -928,7 +892,9 @@ Preparing...
 
 </div>
 
+
 <!-- INSTALL POPUP -->
+
 <div class="install-box" id="installBox">
 
 <div class="install-head">
@@ -955,7 +921,9 @@ Safari → Share → Add to Home Screen
 
 </div>
 
+
 <!-- SETTINGS -->
+
 <div class="drawer" id="drawer">
 
 <div class="drawer-panel">
@@ -1012,7 +980,9 @@ Esc = Close Player
 </div>
 </div>
 
+
 <div class="toast" id="toast"></div>
+
 
 <script>
 
@@ -1021,8 +991,6 @@ Esc = Close Player
    ========================================================= */
 
 const PLAYLISTS=[
-
-/* ORIGINAL SOURCES — KEPT */
 "https://iptv-org.github.io/iptv/categories/sports.m3u",
 "https://iptv-org.github.io/iptv/categories/cricket.m3u",
 "https://iptv-org.github.io/iptv/categories/movies.m3u",
@@ -1030,23 +998,18 @@ const PLAYLISTS=[
 "https://iptv-org.github.io/iptv/categories/news.m3u",
 "https://iptv-org.github.io/iptv/categories/documentary.m3u",
 "https://iptv-org.github.io/iptv/countries/bd.m3u",
-
-/* EXTRA PUBLIC PLAYLISTS — NO MANUAL CHANNEL COPYING NEEDED */
-"https://iptv-org.github.io/iptv/categories/general.m3u",
-"https://iptv-org.github.io/iptv/categories/music.m3u",
-"https://iptv-org.github.io/iptv/categories/education.m3u",
-"https://iptv-org.github.io/iptv/categories/kids.m3u",
-"https://iptv-org.github.io/iptv/categories/family.m3u",
-"https://iptv-org.github.io/iptv/categories/culture.m3u",
-"https://iptv-org.github.io/iptv/categories/business.m3u",
-"https://iptv-org.github.io/iptv/categories/travel.m3u",
-"https://iptv-org.github.io/iptv/categories/weather.m3u",
-"https://iptv-org.github.io/iptv/categories/public.m3u",
-"https://iptv-org.github.io/iptv/categories/comedy.m3u",
-"https://iptv-org.github.io/iptv/categories/lifestyle.m3u",
-"https://iptv-org.github.io/iptv/categories/science.m3u",
-"https://iptv-org.github.io/iptv/categories/animation.m3u"
-
+"https://iptv-org.github.io/iptv/countries/in.m3u",
+"https://iptv-org.github.io/iptv/countries/pk.m3u",
+"https://iptv-org.github.io/iptv/countries/us.m3u",
+"https://iptv-org.github.io/iptv/countries/gb.m3u",
+"https://iptv-org.github.io/iptv/countries/sa.m3u",
+"https://iptv-org.github.io/iptv/countries/ae.m3u",
+"https://iptv-org.github.io/iptv/countries/tr.m3u",
+"https://iptv-org.github.io/iptv/countries/my.m3u",
+"https://iptv-org.github.io/iptv/countries/jp.m3u",
+"https://iptv-org.github.io/iptv/countries/kr.m3u",
+"https://iptv-org.github.io/iptv/countries/ca.m3u",
+"https://iptv-org.github.io/iptv/countries/au.m3u"
 ];
 
 let channels=[];
@@ -1055,6 +1018,8 @@ let currentChannel=null;
 let currentIndex=-1;
 let hls=null;
 let currentCategory="all";
+let currentCountry="all";
+let currentSource="all";
 
 let favorites=JSON.parse(
 localStorage.getItem("bltu_favorites")||"[]"
@@ -1072,7 +1037,9 @@ const loaderText=document.getElementById("loaderText");
 const status=document.getElementById("status");
 const toast=document.getElementById("toast");
 
+
 /* TOAST */
+
 function toastMsg(message){
 
 toast.textContent=message;
@@ -1084,115 +1051,13 @@ toast.classList.remove("show");
 
 }
 
-/* BANGLADESH YOUTUBE LIVE SOURCES */
-const BD_NEWS=[
-{id:"MCArCDRL2jw",name:"🇧🇩 Bangladesh News Live 01"},
-{id:"qREvoxxG6Nc",name:"🇧🇩 Bangladesh News Live 02"},
-{id:"gh_DJW0hB8w",name:"🇧🇩 Bangladesh News Live 03"},
-{id:"hAW0k7l5544",name:"🇧🇩 Bangladesh News Live 04"},
-{id:"LVPgC7LQOw0",name:"🇧🇩 Bangladesh News Live 05"},
-{id:"k387DxKx-5k",name:"🇧🇩 Bangladesh News Live 06"}
-];
-
-let currentYoutubeIndex=-1;
-
-function renderYoutubeNews(){
-
-const box=document.getElementById("youtubeNewsGrid");
-
-if(!box)return;
-
-box.innerHTML=BD_NEWS.map((item,index)=>`
-
-<article class="bd-news-card">
-
-<div class="bd-news-live">
-<span class="live-dot"></span>
-LIVE • YOUTUBE
-</div>
-
-<h3>${escapeHTML(item.name)}</h3>
-
-<p>
-Official/public YouTube embed source.
-যদি source-এ embedding বন্ধ থাকে,
-YouTube-এ সরাসরি খুলতে হতে পারে।
-</p>
-
-<button class="bd-news-play"
-onclick="playYoutubeNews(${index})">
-▶ WATCH LIVE
-</button>
-
-</article>
-
-`).join("");
-
-}
-
-function playYoutubeNews(index){
-
-const item=BD_NEWS[index];
-
-if(!item)return;
-
-currentYoutubeIndex=index;
-
-const modal=document.getElementById("bdNewsPlayer");
-const frame=document.getElementById("bdNewsFrame");
-
-document.getElementById("bdNewsPlayerTitle").textContent=
-item.name;
-
-frame.src=
-`https://www.youtube.com/embed/${item.id}?autoplay=1&playsinline=1&rel=0&hl=bn`;
-
-modal.classList.add("show");
-
-document.body.style.overflow="hidden";
-
-}
-
-function nextYoutubeNews(){
-
-if(currentYoutubeIndex<0)return;
-
-playYoutubeNews(
-(currentYoutubeIndex+1)%BD_NEWS.length
-);
-
-}
-
-function previousYoutubeNews(){
-
-if(currentYoutubeIndex<0)return;
-
-playYoutubeNews(
-(currentYoutubeIndex-1+BD_NEWS.length)%BD_NEWS.length
-);
-
-}
-
-function closeYoutubePlayer(){
-
-const modal=document.getElementById("bdNewsPlayer");
-const frame=document.getElementById("bdNewsFrame");
-
-modal.classList.remove("show");
-
-frame.src="about:blank";
-
-document.body.style.overflow="";
-
-}
 
 /* M3U PARSER */
+
 function parseM3U(text){
 
 const lines=text.split(/\r?\n/);
-
 const result=[];
-
 let info=null;
 
 for(let i=0;i<lines.length;i++){
@@ -1204,13 +1069,11 @@ if(line.startsWith("#EXTINF")){
 const comma=line.indexOf(",");
 
 const attrs=line.substring(0,comma);
-
 const name=line.substring(comma+1).trim();
 
 function attr(key){
 
 const regex=new RegExp(key+'="([^"]*)"');
-
 const match=regex.exec(attrs);
 
 return match?match[1]:"";
@@ -1249,7 +1112,9 @@ return result;
 
 }
 
+
 /* CATEGORY */
+
 function detectCategory(channel){
 
 const text=(
@@ -1284,134 +1149,75 @@ return"entertainment";
 
 }
 
+
 /* LOAD */
+
+async function fetchPlaylistSafe(url){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),12000);
+  try{
+    const response=await fetch(url,{cache:"no-store",signal:controller.signal});
+    if(!response.ok) throw new Error("HTTP "+response.status);
+    return await response.text();
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
 async function loadPlaylists(){
+  toastMsg("📡 Public channels loading...");
+  const results=await Promise.allSettled(
+    PLAYLISTS.map(url=>fetchPlaylistSafe(url))
+  );
+  const all=[];
+  const seen=new Set();
 
-let all=[];
+  results.forEach((result,index)=>{
+    if(result.status!=="fulfilled") return;
+    for(const channel of parseM3U(result.value)){
+      if(!seen.has(channel.url)){
+        seen.add(channel.url);
+        all.push({
+          ...channel,
+          id:"ch_"+all.length,
+          category:detectCategory(channel)
+        });
+      }
+    }
+  });
 
-const seen=new Set();
+  channels=all;
+  updateStats();
+  render();
 
-toastMsg("📡 Public channels loading...");
-
-const fetchPlaylist=async playlist=>{
-
-try{
-
-const controller=new AbortController();
-
-const timer=setTimeout(
-()=>controller.abort(),
-12000
-);
-
-const response=await fetch(
-playlist,
-{
-cache:"no-store",
-signal:controller.signal
-}
-);
-
-clearTimeout(timer);
-
-if(!response.ok)return[];
-
-return parseM3U(
-await response.text()
-);
-
-}catch(error){
-
-console.log(
-"Playlist unavailable:",
-playlist
-);
-
-return[];
-
+  toastMsg(channels.length
+    ? "🔥 "+channels.length+" public channels loaded"
+    : "⚠️ Public playlist এখন পাওয়া যাচ্ছে না");
 }
 
-};
-
-const results=
-await Promise.all(
-PLAYLISTS.map(fetchPlaylist)
-);
-
-for(const list of results){
-
-for(const channel of list){
-
-if(!seen.has(channel.url)){
-
-seen.add(channel.url);
-
-all.push({
-...channel,
-id:"ch_"+all.length,
-category:detectCategory(channel)
-});
-
-}
-
-}
-
-}
-
-channels=all;
-
-updateStats();
-
-render();
-
-if(channels.length){
-
-toastMsg(
-"🔥 "+channels.length+
-" public channels loaded"
-);
-
-}else{
-
-toastMsg(
-"⚠️ Public playlist unavailable — YouTube Live section is still ready"
-);
-
-}
-
-}
 
 /* STATS */
+
 function updateStats(){
 
-document.getElementById(
-"totalChannels"
-).textContent=channels.length;
+document.getElementById("totalChannels").textContent=channels.length;
 
-document.getElementById(
-"movieCount"
-).textContent=
-channels.filter(
-x=>x.category==="movies"
-).length;
+document.getElementById("movieCount").textContent=
+channels.filter(x=>x.category==="movies").length;
 
-document.getElementById(
-"sportsCount"
-).textContent=
-channels.filter(
-x=>
+document.getElementById("sportsCount").textContent=
+channels.filter(x=>
 x.category==="sports"||
 x.category==="cricket"
 ).length;
 
-document.getElementById(
-"favCount"
-).textContent=
-favorites.length;
+document.getElementById("favCount").textContent=favorites.length;
 
 }
 
+
 /* ESCAPE */
+
 function escapeHTML(value=""){
 
 return String(value).replace(
@@ -1427,7 +1233,9 @@ char=>({
 
 }
 
+
 /* INITIALS */
+
 function initials(name){
 
 const parts=name
@@ -1442,11 +1250,12 @@ return parts.slice(0,2)
 
 }
 
+
 /* RENDER */
+
 function render(){
 
-const query=
-search.value.toLowerCase().trim();
+const query=search.value.toLowerCase().trim();
 
 filtered=channels.filter(channel=>{
 
@@ -1457,24 +1266,37 @@ channel.country+" "+
 channel.language
 ).toLowerCase();
 
-const searchOK=
-!query||text.includes(query);
+const searchOK=!query||text.includes(query);
 
 let categoryOK=true;
 
 if(currentCategory==="favorites"){
 
-categoryOK=
-favorites.includes(channel.id);
+categoryOK=favorites.includes(channel.id);
 
 }else if(currentCategory!=="all"){
 
-categoryOK=
-channel.category===currentCategory;
+categoryOK=channel.category===currentCategory;
 
 }
 
-return searchOK&&categoryOK;
+let countryOK=true;
+if(currentCountry!=="all"){
+  const c=(channel.country||"").toLowerCase();
+  const wanted=currentCountry.toLowerCase();
+  countryOK=c.includes(wanted) || text.includes(wanted);
+}
+
+let sourceOK=true;
+if(currentSource==="world"){
+  sourceOK=!!channel.country;
+}else if(currentSource==="countries"){
+  sourceOK=!!channel.country;
+}else if(currentSource==="categories"){
+  sourceOK=!!channel.group || !!channel.category;
+}
+
+return searchOK&&categoryOK&&countryOK&&sourceOK;
 
 });
 
@@ -1486,11 +1308,9 @@ filtered.length+" channels";
 filtered.slice(0,700).forEach(channel=>{
 
 const card=document.createElement("article");
-
 card.className="card";
 
-const favorite=
-favorites.includes(channel.id);
+const favorite=favorites.includes(channel.id);
 
 card.innerHTML=`
 
@@ -1510,32 +1330,21 @@ initials(channel.name)
 
 </div>
 
-<button class="star">
-${favorite?"★":"☆"}
-</button>
+<button class="star">${favorite?"★":"☆"}</button>
 
 </div>
 
 <div class="card-info">
 
-<h3>
-${escapeHTML(channel.name)}
-</h3>
+<h3>${escapeHTML(channel.name)}</h3>
 
-<p>
-${escapeHTML(
-channel.group||
-channel.category||
-"Live TV"
-)}
-</p>
+<p>${escapeHTML(
+channel.group||channel.category||"Live TV"
+)}</p>
 
 <div class="badge">
-
 <span class="live-dot"></span>
-
 PUBLIC LIVE
-
 </div>
 
 <button class="play">
@@ -1543,39 +1352,35 @@ PUBLIC LIVE
 </button>
 
 </div>
-
 `;
 
 card.querySelector(".star").onclick=e=>{
 
 e.stopPropagation();
-
 toggleFavorite(channel.id);
 
 };
 
 card.querySelector(".play").onclick=()=>{
-
 playChannel(channel);
-
 };
 
 grid.appendChild(card);
 
 });
 
-empty.style.display=
-filtered.length?"none":"block";
+empty.style.display=filtered.length?"none":"block";
 
 }
 
+
 /* FAVORITES */
+
 function toggleFavorite(id){
 
 if(favorites.includes(id)){
 
-favorites=
-favorites.filter(x=>x!==id);
+favorites=favorites.filter(x=>x!==id);
 
 }else{
 
@@ -1589,7 +1394,6 @@ JSON.stringify(favorites)
 );
 
 updateStats();
-
 render();
 
 toastMsg(
@@ -1599,6 +1403,7 @@ favorites.includes(id)
 );
 
 }
+
 
 function clearFavorites(){
 
@@ -1610,55 +1415,41 @@ localStorage.setItem(
 );
 
 updateStats();
-
 render();
 
 toastMsg("🗑️ My List cleared");
 
 }
 
+
 /* CATEGORY */
+
 function setCategory(category){
 
 currentCategory=category;
 
 document.querySelectorAll(".cat")
 .forEach(button=>{
-
 button.classList.toggle(
 "active",
 button.dataset.cat===category
 );
-
 });
 
 const titles={
-
 all:"🔴 Live Channels",
-
 bd:"🇧🇩 Bangladesh",
-
 sports:"⚽ Sports",
-
 cricket:"🏏 Cricket",
-
 movies:"🎬 Movies",
-
 entertainment:"🍿 Entertainment",
-
 news:"📰 News",
-
 documentary:"🌍 Documentary",
-
 favorites:"❤️ My List"
-
 };
 
-document.getElementById(
-"sectionTitle"
-).textContent=
-titles[category]||
-"Live Channels";
+document.getElementById("sectionTitle").textContent=
+titles[category]||"Live Channels";
 
 render();
 
@@ -1666,62 +1457,112 @@ scrollChannels();
 
 }
 
-document.querySelectorAll(".cat")
-.forEach(button=>{
-
+document.querySelectorAll(".cat").forEach(button=>{
 button.addEventListener("click",()=>{
-
-setCategory(
-button.dataset.cat
-);
-
+setCategory(button.dataset.cat);
+});
 });
 
+search.addEventListener("input",render);
+
+
+const countryFilter=document.getElementById("countryFilter");
+const sourceFilter=document.getElementById("sourceFilter");
+
+countryFilter.addEventListener("change",()=>{
+  currentCountry=countryFilter.value;
+  render();
 });
 
-search.addEventListener(
-"input",
-render
-);
+sourceFilter.addEventListener("change",()=>{
+  currentSource=sourceFilter.value;
+  render();
+});
+
+/* YOUTUBE NEWS */
+const BD_NEWS=[
+{id:"MCArCDRL2jw",name:"🇧🇩 Bangladesh News Live 01"},
+{id:"qREvoxxG6Nc",name:"🇧🇩 Bangladesh News Live 02"},
+{id:"gh_DJW0hB8w",name:"🇧🇩 Bangladesh News Live 03"},
+{id:"hAW0k7l5544",name:"🇧🇩 Bangladesh News Live 04"},
+{id:"LVPgC7LQOw0",name:"🇧🇩 Bangladesh News Live 05"},
+{id:"k387DxKx-5k",name:"🇧🇩 Bangladesh News Live 06"}
+];
+let currentYoutubeIndex=-1;
+
+function renderYoutubeNews(){
+  const box=document.getElementById("youtubeNewsGrid");
+  if(!box)return;
+  box.innerHTML=BD_NEWS.map((item,i)=>`
+    <article class="yt-card">
+      <div class="yt-thumb">
+        <img loading="lazy" src="https://i.ytimg.com/vi/${item.id}/hqdefault.jpg" alt="">
+        <button class="yt-play" onclick="playYoutubeNews(${i})">▶</button>
+      </div>
+      <div class="yt-body">
+        <b>${item.name}</b>
+        <button class="yt-watch" onclick="playYoutubeNews(${i})">▶ WATCH LIVE</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function playYoutubeNews(index){
+  const item=BD_NEWS[index];
+  if(!item)return;
+  currentYoutubeIndex=index;
+  const wrap=document.getElementById("ytPlayerWrap");
+  const frame=document.getElementById("ytPlayerFrame");
+  document.getElementById("ytPlayerTitle").textContent=item.name;
+  frame.src=`https://www.youtube.com/embed/${item.id}?autoplay=1&playsinline=1&rel=0&hl=bn`;
+  wrap.classList.add("show");
+  document.body.style.overflow="hidden";
+}
+
+function nextYoutubeNews(){
+  if(!BD_NEWS.length)return;
+  playYoutubeNews((currentYoutubeIndex+1)%BD_NEWS.length);
+}
+function previousYoutubeNews(){
+  if(!BD_NEWS.length)return;
+  playYoutubeNews((currentYoutubeIndex-1+BD_NEWS.length)%BD_NEWS.length);
+}
+function closeYoutubePlayer(){
+  const frame=document.getElementById("ytPlayerFrame");
+  document.getElementById("ytPlayerWrap").classList.remove("show");
+  frame.src="";
+  document.body.style.overflow="";
+}
+
+renderYoutubeNews();
 
 /* PLAYER */
+
 async function playChannel(channel){
 
 currentChannel=channel;
 
-currentIndex=
-filtered.findIndex(
+currentIndex=filtered.findIndex(
 x=>x.id===channel.id
 );
 
 player.classList.add("show");
-
 document.body.style.overflow="hidden";
 
-document.getElementById(
-"playerTitle"
-).textContent=
+document.getElementById("playerTitle").textContent=
 "🔴 "+channel.name;
 
 loader.style.display="grid";
-
-loaderText.textContent=
-"Connecting to live stream...";
-
+loaderText.textContent="Connecting to live stream...";
 status.textContent="Loading...";
 
 if(hls){
-
 hls.destroy();
-
 hls=null;
-
 }
 
 video.pause();
-
 video.removeAttribute("src");
-
 video.load();
 
 const url=channel.url;
@@ -1735,7 +1576,6 @@ video.src=url;
 video.onloadedmetadata=()=>{
 
 loader.style.display="none";
-
 status.textContent="🔴 LIVE";
 
 video.play().catch(()=>{});
@@ -1746,31 +1586,19 @@ video.onerror=()=>streamError();
 
 }
 
-else if(
-window.Hls&&
-Hls.isSupported()
-){
+else if(window.Hls&&Hls.isSupported()){
 
 hls=new Hls({
-
 enableWorker:true,
-
 lowLatencyMode:true,
-
 backBufferLength:30,
-
 maxBufferLength:20,
-
 maxMaxBufferLength:40,
-
 manifestLoadingTimeOut:10000,
-
 fragLoadingTimeOut:10000
-
 });
 
 hls.loadSource(url);
-
 hls.attachMedia(video);
 
 hls.on(
@@ -1778,7 +1606,6 @@ Hls.Events.MANIFEST_PARSED,
 ()=>{
 
 loader.style.display="none";
-
 status.textContent="🔴 LIVE";
 
 video.play().catch(()=>{});
@@ -1806,13 +1633,14 @@ streamError(
 
 }
 
+
 /* ERROR */
+
 function streamError(message){
 
 loader.style.display="grid";
 
-loaderText.textContent=
-"Stream unavailable";
+loaderText.textContent="Stream unavailable";
 
 status.textContent=
 message||
@@ -1820,7 +1648,9 @@ message||
 
 }
 
+
 /* CONTROLS */
+
 function retry(){
 
 if(currentChannel)
@@ -1829,55 +1659,30 @@ playChannel(currentChannel);
 }
 
 function nextChannel(){
-
-if(
-document.getElementById(
-"bdNewsPlayer"
-).classList.contains("show")
-){
-
-nextYoutubeNews();
-
-return;
-
+if(document.getElementById("ytPlayerWrap").classList.contains("show")){
+  nextYoutubeNews();
+  return;
 }
-
 if(!filtered.length)return;
 
 currentIndex=
-(currentIndex+1)%
-filtered.length;
+(currentIndex+1)%filtered.length;
 
-playChannel(
-filtered[currentIndex]
-);
+playChannel(filtered[currentIndex]);
 
 }
 
 function previousChannel(){
-
-if(
-document.getElementById(
-"bdNewsPlayer"
-).classList.contains("show")
-){
-
-previousYoutubeNews();
-
-return;
-
+if(document.getElementById("ytPlayerWrap").classList.contains("show")){
+  previousYoutubeNews();
+  return;
 }
-
 if(!filtered.length)return;
 
 currentIndex=
-(currentIndex-1+
-filtered.length)%
-filtered.length;
+(currentIndex-1+filtered.length)%filtered.length;
 
-playChannel(
-filtered[currentIndex]
-);
+playChannel(filtered[currentIndex]);
 
 }
 
@@ -1890,15 +1695,11 @@ document.body.style.overflow="";
 video.pause();
 
 if(hls){
-
 hls.destroy();
-
 hls=null;
-
 }
 
 video.removeAttribute("src");
-
 video.load();
 
 }
@@ -1906,11 +1707,8 @@ video.load();
 function fullscreen(){
 
 if(document.fullscreenElement)
-
 document.exitFullscreen();
-
 else
-
 player.requestFullscreen?.();
 
 }
@@ -1920,11 +1718,8 @@ async function pip(){
 try{
 
 if(document.pictureInPictureElement)
-
 await document.exitPictureInPicture();
-
 else
-
 await video.requestPictureInPicture();
 
 }catch(e){
@@ -1935,7 +1730,9 @@ toastMsg("⚠️ PiP unavailable");
 
 }
 
+
 /* SHARE */
+
 async function shareCurrent(){
 
 if(!currentChannel)return;
@@ -1943,26 +1740,16 @@ if(!currentChannel)return;
 try{
 
 await navigator.share({
-
 title:currentChannel.name,
-
-text:
-"Watch "+
-currentChannel.name+
-" on Bangla Live TV Ultra",
-
+text:"Watch "+currentChannel.name+" on Bangla Live TV Ultra",
 url:location.href
-
 });
 
 }catch(e){
 
 try{
 
-await navigator.clipboard.writeText(
-location.href
-);
-
+await navigator.clipboard.writeText(location.href);
 toastMsg("🔗 Link copied");
 
 }catch(x){}
@@ -1971,44 +1758,31 @@ toastMsg("🔗 Link copied");
 
 }
 
+
 /* VIEW */
+
 function setView(type){
 
-grid.classList.toggle(
-"list",
-type==="list"
-);
+grid.classList.toggle("list",type==="list");
 
-localStorage.setItem(
-"bltu_view",
-type
-);
+localStorage.setItem("bltu_view",type);
 
 }
 
 setView(
-localStorage.getItem(
-"bltu_view"
-)||"grid"
+localStorage.getItem("bltu_view")||"grid"
 );
+
 
 /* THEME */
-document.getElementById(
-"themeBtn"
-).onclick=()=>{
 
-document.body.classList.toggle(
-"light"
-);
+document.getElementById("themeBtn").onclick=()=>{
 
-const light=
-document.body.classList.contains(
-"light"
-);
+document.body.classList.toggle("light");
 
-document.getElementById(
-"themeBtn"
-).textContent=
+const light=document.body.classList.contains("light");
+
+document.getElementById("themeBtn").textContent=
 light?"🌙":"☀️";
 
 localStorage.setItem(
@@ -2018,101 +1792,68 @@ light?"light":"dark"
 
 };
 
-if(
-localStorage.getItem(
-"bltu_theme"
-)==="light"
-){
+if(localStorage.getItem("bltu_theme")==="light"){
 
-document.body.classList.add(
-"light"
-);
+document.body.classList.add("light");
 
-document.getElementById(
-"themeBtn"
-).textContent="🌙";
+document.getElementById("themeBtn").textContent="🌙";
 
 }
 
+
 /* DRAWER */
-document.getElementById(
-"menuBtn"
-).onclick=()=>{
 
-document.getElementById(
-"drawer"
-).classList.add("show");
-
+document.getElementById("menuBtn").onclick=()=>{
+document.getElementById("drawer").classList.add("show");
 };
 
 function closeDrawer(){
-
-document.getElementById(
-"drawer"
-).classList.remove("show");
-
+document.getElementById("drawer").classList.remove("show");
 }
 
+
 /* EXPORT */
+
 function exportFavorites(){
 
 const blob=new Blob(
 [
-JSON.stringify(
-favorites,
-null,
-2
-)
+JSON.stringify(favorites,null,2)
 ],
-{
-type:"application/json"
-}
+{type:"application/json"}
 );
 
-const url=
-URL.createObjectURL(blob);
+const url=URL.createObjectURL(blob);
 
-const a=
-document.createElement("a");
+const a=document.createElement("a");
 
 a.href=url;
-
-a.download=
-"bangla-live-favorites.json";
-
+a.download="bangla-live-favorites.json";
 a.click();
 
 URL.revokeObjectURL(url);
 
-toastMsg(
-"📤 Favorites exported"
-);
+toastMsg("📤 Favorites exported");
 
 }
 
-/* IMPORT */
-document.getElementById(
-"importFile"
-).addEventListener(
-"change",
-event=>{
 
-const file=
-event.target.files[0];
+/* IMPORT */
+
+document.getElementById("importFile")
+.addEventListener("change",event=>{
+
+const file=event.target.files[0];
 
 if(!file)return;
 
-const reader=
-new FileReader();
+const reader=new FileReader();
 
 reader.onload=()=>{
 
 try{
 
-const data=
-JSON.parse(
-reader.result
-);
+const data=JSON.parse(reader.result);
 
 if(Array.isArray(data)){
 
@@ -2124,20 +1865,15 @@ JSON.stringify(favorites)
 );
 
 updateStats();
-
 render();
 
-toastMsg(
-"📥 Favorites imported"
-);
+toastMsg("📥 Favorites imported");
 
 }
 
 }catch(e){
 
-toastMsg(
-"❌ Invalid JSON"
-);
+toastMsg("❌ Invalid JSON");
 
 }
 
@@ -2146,6 +1882,7 @@ toastMsg(
 reader.readAsText(file);
 
 });
+
 
 /* =========================================================
    INSTALL SYSTEM
@@ -2157,15 +1894,12 @@ event=>{
 
 event.preventDefault();
 
-deferredInstallPrompt=
-event;
+deferredInstallPrompt=event;
 
-setTimeout(
-showInstall,
-2500
-);
+setTimeout(showInstall,2500);
 
 });
+
 
 async function installApp(){
 
@@ -2190,24 +1924,16 @@ return;
 }
 
 if(
-window.matchMedia(
-"(display-mode: standalone)"
-).matches
+window.matchMedia("(display-mode: standalone)").matches
 ){
 
-toastMsg(
-"✅ App already installed"
-);
+toastMsg("✅ App already installed");
 
 return;
 
 }
 
-if(
-/iphone|ipad|ipod/i.test(
-navigator.userAgent
-)
-){
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
 
 toastMsg(
 "📱 Safari → Share → Add to Home Screen"
@@ -2227,6 +1953,7 @@ showInstall();
 
 }
 
+
 function showInstall(){
 
 document.getElementById(
@@ -2234,6 +1961,7 @@ document.getElementById(
 ).classList.add("show");
 
 }
+
 
 function hideInstall(){
 
@@ -2243,10 +1971,10 @@ document.getElementById(
 
 }
 
-document.getElementById(
-"installNav"
-).onclick=
-installApp;
+
+document.getElementById("installNav")
+.onclick=installApp;
+
 
 window.addEventListener(
 "appinstalled",
@@ -2260,11 +1988,11 @@ toastMsg(
 
 });
 
+
 /* iOS */
+
 if(
-/iphone|ipad|ipod/i.test(
-navigator.userAgent
-)&&
+/iphone|ipad|ipod/i.test(navigator.userAgent) &&
 !window.navigator.standalone
 ){
 
@@ -2272,36 +2000,25 @@ document.getElementById(
 "iosHelp"
 ).style.display="block";
 
-setTimeout(
-showInstall,
-3000
-);
+setTimeout(showInstall,3000);
 
 }
 
+
 /* KEYBOARD */
-document.addEventListener(
-"keydown",
-event=>{
+
+document.addEventListener("keydown",event=>{
 
 if(event.key==="Escape"){
-
-if(
-document.getElementById(
-"bdNewsPlayer"
-).classList.contains("show")
-)
+if(document.getElementById("ytPlayerWrap").classList.contains("show"))
 closeYoutubePlayer();
 
-if(
-player.classList.contains("show")
-)
+if(player.classList.contains("show"))
 closePlayer();
 
 if(
-document.getElementById(
-"drawer"
-).classList.contains("show")
+document.getElementById("drawer")
+.classList.contains("show")
 )
 closeDrawer();
 
@@ -2319,16 +2036,10 @@ player.classList.contains("show")
 )
 previousChannel();
 
-if(
-event.key==="n"||
-event.key==="N"
-)
+if(event.key==="n"||event.key==="N")
 nextChannel();
 
-if(
-event.key==="p"||
-event.key==="P"
-)
+if(event.key==="p"||event.key==="P")
 previousChannel();
 
 if(
@@ -2346,7 +2057,9 @@ video.pause();
 
 });
 
+
 /* SCROLL */
+
 function scrollChannels(){
 
 document.getElementById(
@@ -2357,18 +2070,30 @@ behavior:"smooth"
 
 }
 
+
 /* START */
-renderYoutubeNews();
 
 loadPlaylists();
 
 </script>
 
-<script>
-document.getElementById("bdNewsPlayer")?.addEventListener("click",e=>{
-if(e.target.id==="bdNewsPlayer")closeYoutubePlayer();
-});
-</script>
+
+<div class="yt-player-wrap" id="ytPlayerWrap" onclick="if(event.target===this)closeYoutubePlayer()">
+  <div class="yt-player-box">
+    <div class="yt-player-top">
+      <b id="ytPlayerTitle">🇧🇩 Bangladesh News Live</b>
+      <div>
+        <button onclick="previousYoutubeNews()" style="margin-right:6px">◀</button>
+        <button onclick="nextYoutubeNews()" style="margin-right:6px">▶</button>
+        <button onclick="closeYoutubePlayer()">✕</button>
+      </div>
+    </div>
+    <iframe id="ytPlayerFrame" class="yt-frame"
+      title="YouTube Live Player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+</div>
 
 </body>
 </html>
