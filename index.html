@@ -407,6 +407,75 @@ padding:80px 20px;
 color:var(--muted);
 }
 
+
+/* BANGLADESH NEWS YOUTUBE */
+function renderYoutubeNews(){
+  if(!youtubeNewsGrid)return;
+  youtubeNewsGrid.innerHTML=BD_NEWS.map((item,index)=>`
+    <article class="bd-news-card">
+      <div class="bd-news-thumb">
+        <iframe
+          src="https://www.youtube.com/embed/${item.id}?playsinline=1&rel=0&hl=bn"
+          title="${escapeHTML(item.name)}"
+          loading="lazy"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="bd-news-info">
+        <h3>${escapeHTML(item.name)}</h3>
+        <p>🇧🇩 Bangladesh • YouTube Live</p>
+        <button class="bd-news-watch" onclick="playYoutubeNews(${index})">▶ FULL SCREEN LIVE</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function playYoutubeNews(index){
+  if(index<0 || index>=BD_NEWS.length)return;
+  currentYoutubeIndex=index;
+  const item=BD_NEWS[index];
+
+  player.classList.add("show");
+  document.body.style.overflow="hidden";
+  document.getElementById("playerTitle").textContent="🇧🇩 "+item.name;
+
+  if(hls){
+    hls.destroy();
+    hls=null;
+  }
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+
+  youtubeFrame.src=
+    "https://www.youtube.com/embed/"+item.id+
+    "?autoplay=1&playsinline=1&rel=0&hl=bn";
+
+  youtubeOverlay.classList.add("show");
+  loader.style.display="none";
+  status.textContent="🔴 YouTube LIVE";
+}
+
+function nextYoutubeNews(){
+  if(currentYoutubeIndex<0)return;
+  currentYoutubeIndex=(currentYoutubeIndex+1)%BD_NEWS.length;
+  playYoutubeNews(currentYoutubeIndex);
+}
+
+function previousYoutubeNews(){
+  if(currentYoutubeIndex<0)return;
+  currentYoutubeIndex=(currentYoutubeIndex-1+BD_NEWS.length)%BD_NEWS.length;
+  playYoutubeNews(currentYoutubeIndex);
+}
+
+function closeYoutubePlayer(){
+  youtubeOverlay.classList.remove("show");
+  youtubeFrame.src="";
+  currentYoutubeIndex=-1;
+  closePlayer();
+}
+
 /* PLAYER */
 .player{
 position:fixed;
@@ -603,6 +672,107 @@ transition:.3s;
 transform:translate(-50%,0);
 }
 
+
+/* BANGLADESH NEWS — YOUTUBE */
+.bd-news-section{
+  max-width:1600px;
+  margin:0 auto;
+  padding:10px 18px 30px;
+}
+.bd-news-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0 14px;
+}
+.bd-news-head h2{font-size:22px;font-weight:1000}
+.bd-news-head small{color:var(--muted)}
+.bd-news-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+.bd-news-card{
+  overflow:hidden;
+  border-radius:21px;
+  background:linear-gradient(145deg,#101827,#070b13);
+  border:1px solid var(--line);
+  transition:.25s;
+}
+.bd-news-card:hover{
+  transform:translateY(-4px);
+  border-color:#00e5ff55;
+  box-shadow:0 20px 60px #0008;
+}
+.bd-news-thumb{
+  aspect-ratio:16/9;
+  background:#020617;
+  position:relative;
+}
+.bd-news-thumb iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+.bd-news-info{padding:13px}
+.bd-news-info h3{
+  font-size:15px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.bd-news-info p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+.bd-news-watch{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ef4444,#ec4899);
+  color:#fff;
+  border:0;
+  font-weight:1000;
+}
+.youtube-overlay{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:none;
+  background:#000;
+}
+.youtube-overlay.show{display:block}
+.youtube-overlay iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+.youtube-overlay .yt-controls{
+  position:absolute;
+  z-index:3;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:6px;
+}
+.youtube-overlay .yt-controls button{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  background:#ffffff18;
+  border:1px solid #ffffff20;
+  color:#fff;
+  font-size:16px;
+}
+@media(max-width:800px){
+  .bd-news-section{padding-left:12px;padding-right:12px}
+  .bd-news-grid{grid-template-columns:1fr}
+}
+
 /* FOOTER */
 .footer{
 text-align:center;
@@ -743,6 +913,18 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 
 </section>
 
+
+<!-- BANGLADESH NEWS LIVE -->
+<section class="bd-news-section" id="bdNewsLive">
+  <div class="bd-news-head">
+    <div>
+      <h2>🇧🇩 বাংলাদেশের নিউজ লাইভ</h2>
+      <small>YouTube Live • Official/authorized embeds</small>
+    </div>
+  </div>
+  <div class="bd-news-grid" id="youtubeNewsGrid"></div>
+</section>
+
 <main class="container" id="channels">
 
 <div class="categories">
@@ -786,7 +968,8 @@ Live TV, Sports, Cricket, Movies, News & Entertainment —
 <footer class="footer">
 <b>Bangla Live TV Ultra</b><br>
 Live TV • Sports • Cricket • Movies • Entertainment<br>
-Public / authorized streams only
+Public / authorized streams only<br><br>
+<b>DEVELOPER MD RAFIM HOSSEN</b>
 </footer>
 
 
@@ -813,6 +996,20 @@ Public / authorized streams only
 </div>
 
 <video id="video" controls playsinline autoplay preload="auto"></video>
+
+<div class="youtube-overlay" id="youtubeOverlay">
+  <iframe id="youtubeFrame"
+    title="Bangladesh News Live"
+    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen></iframe>
+  <div class="yt-controls">
+    <button onclick="previousYoutubeNews()">⏮</button>
+    <button onclick="nextYoutubeNews()">⏭</button>
+    <button onclick="closeYoutubePlayer()">✕</button>
+  </div>
+</div>
+
 
 <div class="loader" id="loader">
 
@@ -967,6 +1164,22 @@ const loader=document.getElementById("loader");
 const loaderText=document.getElementById("loaderText");
 const status=document.getElementById("status");
 const toast=document.getElementById("toast");
+
+const youtubeOverlay=document.getElementById("youtubeOverlay");
+const youtubeFrame=document.getElementById("youtubeFrame");
+const youtubeNewsGrid=document.getElementById("youtubeNewsGrid");
+
+const BD_NEWS=[
+  {id:"MCArCDRL2jw",name:"🇧🇩 Bangladesh News Live 01"},
+  {id:"qREvoxxG6Nc",name:"🇧🇩 Bangladesh News Live 02"},
+  {id:"gh_DJW0hB8w",name:"🇧🇩 Bangladesh News Live 03"},
+  {id:"hAW0k7l5544",name:"🇧🇩 Bangladesh News Live 04"},
+  {id:"LVPgC7LQOw0",name:"🇧🇩 Bangladesh News Live 05"},
+  {id:"k387DxKx-5k",name:"🇧🇩 Bangladesh News Live 06"}
+];
+
+let currentYoutubeIndex=-1;
+
 
 
 /* TOAST */
@@ -1523,6 +1736,11 @@ playChannel(currentChannel);
 
 function nextChannel(){
 
+if(currentYoutubeIndex>=0){
+  nextYoutubeNews();
+  return;
+}
+
 if(!filtered.length)return;
 
 currentIndex=
@@ -1534,6 +1752,11 @@ playChannel(filtered[currentIndex]);
 
 function previousChannel(){
 
+if(currentYoutubeIndex>=0){
+  previousYoutubeNews();
+  return;
+}
+
 if(!filtered.length)return;
 
 currentIndex=
@@ -1544,6 +1767,10 @@ playChannel(filtered[currentIndex]);
 }
 
 function closePlayer(){
+
+youtubeOverlay.classList.remove("show");
+youtubeFrame.src="";
+currentYoutubeIndex=-1;
 
 player.classList.remove("show");
 
@@ -1928,6 +2155,7 @@ behavior:"smooth"
 
 /* START */
 
+renderYoutubeNews();
 loadPlaylists();
 
 </script>
