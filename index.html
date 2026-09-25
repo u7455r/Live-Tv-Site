@@ -1172,10 +1172,12 @@ async function loadPlaylists(){
   const all=[];
   const seen=new Set();
 
-  // --- NEW CUSTOM LIVE LINK ADDED HERE ---
+  // --- NEW CUSTOM LIVE LINKS ADDED HERE ---
+  
+  // Link 1
   all.push({
-    id: "custom_live_bd_mal",
-    name: "Bangladesh vs Malaysia (Live)",
+    id: "custom_live_bd_mal_1",
+    name: "Bangladesh vs Malaysia (Server 1)",
     logo: "",
     country: "Bangladesh",
     group: "Live Sports",
@@ -1184,6 +1186,20 @@ async function loadPlaylists(){
     category: "sports"
   });
   seen.add("https://live2.domaincdn.cc/livecdn/channel-12.m3u8?auth_key=3000001790325863-0-0-de137f65703461bd9af47550dc885b86");
+
+  // Link 2 (New)
+  all.push({
+    id: "custom_live_bd_mal_2",
+    name: "Bangladesh vs Malaysia (Server 2)",
+    logo: "",
+    country: "Bangladesh",
+    group: "Live Sports",
+    language: "Bengali",
+    url: "https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488b69dcf6bc7a3ba7",
+    category: "sports"
+  });
+  seen.add("https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488b69dcf6bc7a3ba7");
+
   // ---------------------------------------
 
   results.forEach((result,index)=>{
