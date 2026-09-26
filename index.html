@@ -357,6 +357,8 @@ width:100%;
 height:100%;
 object-fit:contain;
 padding:5px;
+background:#ffffff11;
+border-radius: 12px;
 }
 .star{
 width:39px;
@@ -1041,45 +1043,31 @@ const toast=document.getElementById("toast");
 /* TOAST */
 
 function toastMsg(message){
-
 toast.textContent=message;
 toast.classList.add("show");
-
 setTimeout(()=>{
 toast.classList.remove("show");
 },2300);
-
 }
 
 
 /* M3U PARSER */
 
 function parseM3U(text){
-
 const lines=text.split(/\r?\n/);
 const result=[];
 let info=null;
-
 for(let i=0;i<lines.length;i++){
-
 const line=lines[i].trim();
-
 if(line.startsWith("#EXTINF")){
-
 const comma=line.indexOf(",");
-
 const attrs=line.substring(0,comma);
 const name=line.substring(comma+1).trim();
-
 function attr(key){
-
 const regex=new RegExp(key+'="([^"]*)"');
 const match=regex.exec(attrs);
-
 return match?match[1]:"";
-
 }
-
 info={
 name:name||"Unknown Channel",
 logo:attr("tvg-logo"),
@@ -1087,66 +1075,41 @@ country:attr("tvg-country"),
 group:attr("group-title"),
 language:attr("tvg-language")
 };
-
 }
-
 else if(
 info &&
 line &&
 !line.startsWith("#") &&
 /^https:\/\/.+/i.test(line)
 ){
-
 result.push({
 ...info,
 url:line
 });
-
 info=null;
-
 }
-
 }
-
 return result;
-
 }
 
 
 /* CATEGORY */
 
 function detectCategory(channel){
-
 const text=(
 channel.name+" "+
 channel.group+" "+
 channel.country+" "+
 channel.language
 ).toLowerCase();
-
-if(/cricket|willow|icc|ipl/.test(text))
-return"cricket";
-
-if(/sport|football|soccer|tennis|golf|racing|formula|basket|fight|ufc/.test(text))
-return"sports";
-
-if(/movie|cinema|film|classic|horror|action/.test(text))
-return"movies";
-
-if(/news|breaking/.test(text))
-return"news";
-
-if(/documentary/.test(text))
-return"documentary";
-
-if(/entertainment|music|comedy|show|lifestyle/.test(text))
+if(/cricket|willow|icc|ipl/.test(text)) return"cricket";
+if(/sport|football|soccer|tennis|golf|racing|formula|basket|fight|ufc/.test(text)) return"sports";
+if(/movie|cinema|film|classic|horror|action/.test(text)) return"movies";
+if(/news|breaking/.test(text)) return"news";
+if(/documentary/.test(text)) return"documentary";
+if(/entertainment|music|comedy|show|lifestyle/.test(text)) return"entertainment";
+if(/bangladesh|bd|dhaka/.test(text)) return"bd";
 return"entertainment";
-
-if(/bangladesh|bd|dhaka/.test(text))
-return"bd";
-
-return"entertainment";
-
 }
 
 
@@ -1172,44 +1135,35 @@ async function loadPlaylists(){
   const all=[];
   const seen=new Set();
 
-  // --- NEW CUSTOM LIVE LINKS ADDED HERE ---
+  // --- NEW CUSTOM LIVE LINKS WITH LOGOS ADDED HERE ---
   
-  // Link 1: BD vs MAL
+  // Link 1: BD vs MAL (Server 1)
   all.push({
     id: "custom_live_bd_mal_1",
     name: "Bangladesh vs Malaysia (Server 1)",
-    logo: "",
-    country: "Bangladesh",
-    group: "Live Sports",
-    language: "Bengali",
-    url: "https://live2.domaincdn.cc/livecdn/channel-12.m3u8?auth_key=3000001790325863-0-0-de137f65703461bd9af47550dc885b86",
-    category: "sports"
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Bangladesh_Football_Federation_logo.svg/200px-Bangladesh_Football_Federation_logo.svg.png",
+    country: "Bangladesh", group: "Live Sports", language: "Bengali", category: "sports",
+    url: "https://live2.domaincdn.cc/livecdn/channel-12.m3u8?auth_key=3000001790325863-0-0-de137f65703461bd9af47550dc885b86"
   });
   seen.add("https://live2.domaincdn.cc/livecdn/channel-12.m3u8?auth_key=3000001790325863-0-0-de137f65703461bd9af47550dc885b86");
 
-  // Link 2: BD vs MAL
+  // Link 2: BD vs MAL (Server 2)
   all.push({
     id: "custom_live_bd_mal_2",
     name: "Bangladesh vs Malaysia (Server 2)",
-    logo: "",
-    country: "Bangladesh",
-    group: "Live Sports",
-    language: "Bengali",
-    url: "https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488b69dcf6bc7a3ba7",
-    category: "sports"
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Bangladesh_Football_Federation_logo.svg/200px-Bangladesh_Football_Federation_logo.svg.png",
+    country: "Bangladesh", group: "Live Sports", language: "Bengali", category: "sports",
+    url: "https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488b69dcf6bc7a3ba7"
   });
   seen.add("https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488b69dcf6bc7a3ba7");
 
-  // Link 3: BD vs MAL
+  // Link 3: BD vs MAL (Server 3)
   all.push({
     id: "custom_live_bd_mal_3",
     name: "Bangladesh vs Malaysia (Server 3)",
-    logo: "",
-    country: "Bangladesh",
-    group: "Live Sports",
-    language: "Bengali",
-    url: "https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488d69dcf6bc7a3ba7",
-    category: "sports"
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Bangladesh_Football_Federation_logo.svg/200px-Bangladesh_Football_Federation_logo.svg.png",
+    country: "Bangladesh", group: "Live Sports", language: "Bengali", category: "sports",
+    url: "https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488d69dcf6bc7a3ba7"
   });
   seen.add("https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1790329203-0-0-a48b9eac0b09a9488d69dcf6bc7a3ba7");
 
@@ -1217,46 +1171,53 @@ async function loadPlaylists(){
   all.push({
     id: "custom_live_ekhon_tv",
     name: "Ekhon TV (Live)",
-    logo: "",
-    country: "Bangladesh",
-    group: "Live News",
-    language: "Bengali",
-    url: "https://prod-linear-media.toffeelive.com/cdn/live/ekhon_tv/1080/1080.m3u8?hdntl=Expires=1790417659~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJrFS13uLqpBFI-Xno0QEecQhO8n41DKHSGjAXy-RtDuABfU2jIRYU9OUXNbZq5RrHrFKSdBwLgwJil3OP9IJQEK&nocache=1790331268871",
-    category: "news"
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Ekhon_TV.svg/512px-Ekhon_TV.svg.png",
+    country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
+    url: "https://prod-linear-media.toffeelive.com/cdn/live/ekhon_tv/1080/1080.m3u8?hdntl=Expires=1790417659~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJrFS13uLqpBFI-Xno0QEecQhO8n41DKHSGjAXy-RtDuABfU2jIRYU9OUXNbZq5RrHrFKSdBwLgwJil3OP9IJQEK&nocache=1790331268871"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/ekhon_tv/1080/1080.m3u8?hdntl=Expires=1790417659~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJrFS13uLqpBFI-Xno0QEecQhO8n41DKHSGjAXy-RtDuABfU2jIRYU9OUXNbZq5RrHrFKSdBwLgwJil3OP9IJQEK&nocache=1790331268871");
 
   // Link 5: Jamuna TV
   all.push({
-    id: "custom_jamuna_tv", name: "Jamuna TV", logo: "", country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
+    id: "custom_jamuna_tv", name: "Jamuna TV", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Jamuna_Television_logo.svg/512px-Jamuna_Television_logo.svg.png", 
+    country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/jamuna_tv/576/576.m3u8?hdntl=Expires=1790418580~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJpvCvGgJzj6kxu86F2p2fd9V40z1B329CSLGxokq43TNCqxty3DwPMh89Hb2oHu2Czi6fLSKIKErI0EKwHMBoIB&nocache=1790332192149"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/jamuna_tv/576/576.m3u8?hdntl=Expires=1790418580~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJpvCvGgJzj6kxu86F2p2fd9V40z1B329CSLGxokq43TNCqxty3DwPMh89Hb2oHu2Czi6fLSKIKErI0EKwHMBoIB&nocache=1790332192149");
 
   // Link 6: Sony Aath
   all.push({
-    id: "custom_sony_aath", name: "Sony Aath", logo: "", country: "India", group: "Entertainment", language: "Bengali", category: "entertainment",
+    id: "custom_sony_aath", name: "Sony Aath", 
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Sony_Aath_logo.svg/512px-Sony_Aath_logo.svg.png", 
+    country: "India", group: "Entertainment", language: "Bengali", category: "entertainment",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/sonyaath/576/576.m3u8?hdntl=Expires=1790418692~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJqcmnt3f0_GPXhtRglyx_d-Iwy2toOgzFbd8UnK9I1MhoDtCAUBlsOGY9LA2iOenSIi8xZdHHHwugkys-CmPecG&nocache=1790332300109"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/sonyaath/576/576.m3u8?hdntl=Expires=1790418692~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJqcmnt3f0_GPXhtRglyx_d-Iwy2toOgzFbd8UnK9I1MhoDtCAUBlsOGY9LA2iOenSIi8xZdHHHwugkys-CmPecG&nocache=1790332300109");
 
   // Link 7: Channel i
   all.push({
-    id: "custom_channel_i", name: "Channel i", logo: "", country: "Bangladesh", group: "Entertainment", language: "Bengali", category: "bd",
+    id: "custom_channel_i", name: "Channel i", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Channel_i_logo.svg/512px-Channel_i_logo.svg.png", 
+    country: "Bangladesh", group: "Entertainment", language: "Bengali", category: "bd",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/channel_i/1080/1080.m3u8?hdntl=Expires=1790418756~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJrez4hdOa6IZayGK3lMoR1TMaR5EJ8ho2mYrB6QtK-XLJG6XgnVM-dMMghBtPNHOxMWXCAP-7MSBjOMm7LlyB4N&nocache=1790332364731"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/channel_i/1080/1080.m3u8?hdntl=Expires=1790418756~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJrez4hdOa6IZayGK3lMoR1TMaR5EJ8ho2mYrB6QtK-XLJG6XgnVM-dMMghBtPNHOxMWXCAP-7MSBjOMm7LlyB4N&nocache=1790332364731");
 
   // Link 8: Somoy TV
   all.push({
-    id: "custom_somoy_tv", name: "Somoy TV", logo: "", country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
+    id: "custom_somoy_tv", name: "Somoy TV", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Somoy_TV.svg/512px-Somoy_TV.svg.png", 
+    country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/somoy_tv/1080/1080.m3u8?hdntl=Expires=1790418816~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJo0JjTFJg4qI2ofOGWV-UycsCYoc97UUVMke1-lYIUZseruf_3TGISD_CZV6WlYa0dTLITB-wlqIjk8jgbVe3QN&nocache=1790332429567"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/somoy_tv/1080/1080.m3u8?hdntl=Expires=1790418816~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJo0JjTFJg4qI2ofOGWV-UycsCYoc97UUVMke1-lYIUZseruf_3TGISD_CZV6WlYa0dTLITB-wlqIjk8jgbVe3QN&nocache=1790332429567");
 
   // Link 9: FIFA World Cup
   all.push({
-    id: "custom_fifa_world_cup", name: "FIFA World Cup", logo: "", country: "International", group: "Live Sports", language: "English", category: "sports",
+    id: "custom_fifa_world_cup", name: "FIFA World Cup", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/FIFA_logo_without_slogan.svg/512px-FIFA_logo_without_slogan.svg.png", 
+    country: "International", group: "Live Sports", language: "English", category: "sports",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/fifa_world_cup/1080/1080.m3u8?hdntl=Expires=1790418874~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJp9atlWwkztLLop5YeLPq-_HseCZoefUwXw-wFRAVC6C76idwiAA-cyH6ICAwwQdHvlpXAQB6DJismkrN3svWUG&nocache=1790332487998"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/fifa_world_cup/1080/1080.m3u8?hdntl=Expires=1790418874~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJp9atlWwkztLLop5YeLPq-_HseCZoefUwXw-wFRAVC6C76idwiAA-cyH6ICAwwQdHvlpXAQB6DJismkrN3svWUG&nocache=1790332487998");
@@ -1277,7 +1238,9 @@ async function loadPlaylists(){
 
   // Link 12: Independent TV
   all.push({
-    id: "custom_independent_tv", name: "Independent TV", logo: "", country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
+    id: "custom_independent_tv", name: "Independent TV", 
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Independent_Television_%28Bangladesh%29_logo.svg/512px-Independent_Television_%28Bangladesh%29_logo.svg.png", 
+    country: "Bangladesh", group: "Live News", language: "Bengali", category: "news",
     url: "https://prod-linear-media.toffeelive.com/cdn/live/independent_tv/576/576.m3u8?hdntl=Expires=1790419079~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJpdFZxSDbRzYAMgHUKfDKvwn9HkmS8B14LT5e8VNwnBGarf1Mpc3caFI351SvlHvxdSmZ1l8hW853hX9HeWO2QO&nocache=1790332686967"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/independent_tv/576/576.m3u8?hdntl=Expires=1790419079~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJpdFZxSDbRzYAMgHUKfDKvwn9HkmS8B14LT5e8VNwnBGarf1Mpc3caFI351SvlHvxdSmZ1l8hW853hX9HeWO2QO&nocache=1790332686967");
@@ -1295,6 +1258,33 @@ async function loadPlaylists(){
     url: "https://prod-linear-media.toffeelive.com/cdn/live/movie_bangla/320/320.m3u8?hdntl=Expires=1790419600~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJofc6RnMHVyoyWopZCjMC6L8CT-u4dHJzxpWokuU4IPwHjdaYhyk9yNkLueKMQ7gAACXLhk4hQw8dfu6HItetsH&nocache=1790333211874"
   });
   seen.add("https://prod-linear-media.toffeelive.com/cdn/live/movie_bangla/320/320.m3u8?hdntl=Expires=1790419600~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiODI4MTE4MWItZDAxMC00ODAzLWI1M2YtZjhiODYzY2RlOGYxIn0~Signature=AZR2wJofc6RnMHVyoyWopZCjMC6L8CT-u4dHJzxpWokuU4IPwHjdaYhyk9yNkLueKMQ7gAACXLhk4hQw8dfu6HItetsH&nocache=1790333211874");
+
+  // Link 15: HUM TV
+  all.push({
+    id: "custom_hum_tv", name: "HUM TV", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Hum_TV_logo.svg/256px-Hum_TV_logo.svg.png", 
+    country: "Pakistan", group: "Entertainment", language: "Urdu", category: "entertainment",
+    url: "https://prod-linear-media.toffeelive.com/cdn/live/hum_tv/1080/1080.m3u8?hdntl=Expires=1790503436~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AZR2wJqA6uD82W8sdX8wxw_nhlK6KiXqdBpri8U9fPjbYwIrVERiDi9hJTKObAIwRpZr1H0Xv7_N7_GeL_t46gwMSEkO&nocache=1790417068992"
+  });
+  seen.add("https://prod-linear-media.toffeelive.com/cdn/live/hum_tv/1080/1080.m3u8?hdntl=Expires=1790503436~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AZR2wJqA6uD82W8sdX8wxw_nhlK6KiXqdBpri8U9fPjbYwIrVERiDi9hJTKObAIwRpZr1H0Xv7_N7_GeL_t46gwMSEkO&nocache=1790417068992");
+
+  // Link 16: FIFA ASEAN 1
+  all.push({
+    id: "custom_fifa_asean_1", name: "FIFA ASEAN 1", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/FIFA_logo_without_slogan.svg/256px-FIFA_logo_without_slogan.svg.png", 
+    country: "International", group: "Sports", language: "English", category: "sports",
+    url: "https://prod-cdn01-live.toffeelive.com/live/FIFA-ASEAN-1/0/master_2500.m3u8?hdntl=Expires=1790503631~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AVCasXso1j4Gx8Ej-ZwTBOTgE7U_EKYd8-2XWLOrmjNi6pl4T2ycGXnmdXcapmwbaz-Q2IPP5Y2xl9ok8yZFvG6j1rYN&nocache=1790417259054"
+  });
+  seen.add("https://prod-cdn01-live.toffeelive.com/live/FIFA-ASEAN-1/0/master_2500.m3u8?hdntl=Expires=1790503631~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AVCasXso1j4Gx8Ej-ZwTBOTgE7U_EKYd8-2XWLOrmjNi6pl4T2ycGXnmdXcapmwbaz-Q2IPP5Y2xl9ok8yZFvG6j1rYN&nocache=1790417259054");
+
+  // Link 17: Sony Max
+  all.push({
+    id: "custom_sony_max", name: "Sony Max", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Sony_MAX_Logo_2022.svg/256px-Sony_MAX_Logo_2022.svg.png", 
+    country: "India", group: "Movies", language: "Hindi", category: "movies",
+    url: "https://prod-linear-media.toffeelive.com/cdn/live/sony_max/576/576.m3u8?hdntl=Expires=1790503722~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AZR2wJrUTa-uYepe3mEEyHbaFJt86Q5zU8R8FvMb9NNj3yvH3KZjL7NbFEIfzEAZhIOedBjtP02e-jWCN5oFPbtVq9UE&nocache=1790417335060"
+  });
+  seen.add("https://prod-linear-media.toffeelive.com/cdn/live/sony_max/576/576.m3u8?hdntl=Expires=1790503722~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWxpbmVhci1tZWRpYS50b2ZmZWVsaXZlLmNvbQ~Data=eyJzdWJzY3JpYmVyX2lkIjoiYWEzNGRiNzQtNTc4NS00NTA0LThjZmUtOWUzNzVmNjVkNTBmIn0~Signature=AZR2wJrUTa-uYepe3mEEyHbaFJt86Q5zU8R8FvMb9NNj3yvH3KZjL7NbFEIfzEAZhIOedBjtP02e-jWCN5oFPbtVq9UE&nocache=1790417335060");
 
   // ---------------------------------------
 
@@ -1325,27 +1315,21 @@ async function loadPlaylists(){
 /* STATS */
 
 function updateStats(){
-
 document.getElementById("totalChannels").textContent=channels.length;
-
 document.getElementById("movieCount").textContent=
 channels.filter(x=>x.category==="movies").length;
-
 document.getElementById("sportsCount").textContent=
 channels.filter(x=>
 x.category==="sports"||
 x.category==="cricket"
 ).length;
-
 document.getElementById("favCount").textContent=favorites.length;
-
 }
 
 
 /* ESCAPE */
 
 function escapeHTML(value=""){
-
 return String(value).replace(
 /[&<>"']/g,
 char=>({
@@ -1356,35 +1340,28 @@ char=>({
 "'":"&#039;"
 }[char])
 );
-
 }
 
 
 /* INITIALS */
 
 function initials(name){
-
 const parts=name
 .replace(/[^\w\s\u0980-\u09ff]/g,"")
 .split(/\s+/)
 .filter(Boolean);
-
 return parts.slice(0,2)
 .map(x=>x[0])
 .join("")
 .toUpperCase()||"TV";
-
 }
 
 
 /* RENDER */
 
 function render(){
-
 const query=search.value.toLowerCase().trim();
-
 filtered=channels.filter(channel=>{
-
 const text=(
 channel.name+" "+
 channel.group+" "+
@@ -1395,15 +1372,10 @@ channel.language
 const searchOK=!query||text.includes(query);
 
 let categoryOK=true;
-
 if(currentCategory==="favorites"){
-
 categoryOK=favorites.includes(channel.id);
-
 }else if(currentCategory!=="all"){
-
 categoryOK=channel.category===currentCategory;
-
 }
 
 let countryOK=true;
@@ -1423,27 +1395,20 @@ if(currentSource==="world"){
 }
 
 return searchOK&&categoryOK&&countryOK&&sourceOK;
-
 });
 
 grid.innerHTML="";
-
 document.getElementById("count").textContent=
 filtered.length+" channels";
 
 filtered.slice(0,700).forEach(channel=>{
-
 const card=document.createElement("article");
 card.className="card";
-
 const favorite=favorites.includes(channel.id);
 
 card.innerHTML=`
-
 <div class="card-top">
-
 <div class="channel-logo">
-
 ${
 channel.logo
 ?
@@ -1453,107 +1418,77 @@ onerror="this.style.display='none'">`
 :
 initials(channel.name)
 }
-
 </div>
-
 <button class="star">${favorite?"★":"☆"}</button>
-
 </div>
-
 <div class="card-info">
-
 <h3>${escapeHTML(channel.name)}</h3>
-
 <p>${escapeHTML(
 channel.group||channel.category||"Live TV"
 )}</p>
-
 <div class="badge">
 <span class="live-dot"></span>
 PUBLIC LIVE
 </div>
-
 <button class="play">
 ▶ WATCH LIVE
 </button>
-
 </div>
 `;
 
 card.querySelector(".star").onclick=e=>{
-
 e.stopPropagation();
 toggleFavorite(channel.id);
-
 };
 
 card.querySelector(".play").onclick=()=>{
 playChannel(channel);
 };
-
 grid.appendChild(card);
-
 });
 
 empty.style.display=filtered.length?"none":"block";
-
 }
 
 
 /* FAVORITES */
 
 function toggleFavorite(id){
-
 if(favorites.includes(id)){
-
 favorites=favorites.filter(x=>x!==id);
-
 }else{
-
 favorites.push(id);
-
 }
-
 localStorage.setItem(
 "bltu_favorites",
 JSON.stringify(favorites)
 );
-
 updateStats();
 render();
-
 toastMsg(
 favorites.includes(id)
 ?"❤️ Added to My List"
 :"💔 Removed from My List"
 );
-
 }
 
 
 function clearFavorites(){
-
 favorites=[];
-
 localStorage.setItem(
 "bltu_favorites",
 "[]"
 );
-
 updateStats();
 render();
-
 toastMsg("🗑️ My List cleared");
-
 }
 
 
 /* CATEGORY */
 
 function setCategory(category){
-
 currentCategory=category;
-
 document.querySelectorAll(".cat")
 .forEach(button=>{
 button.classList.toggle(
@@ -1578,9 +1513,7 @@ document.getElementById("sectionTitle").textContent=
 titles[category]||"Live Channels";
 
 render();
-
 scrollChannels();
-
 }
 
 document.querySelectorAll(".cat").forEach(button=>{
@@ -1590,7 +1523,6 @@ setCategory(button.dataset.cat);
 });
 
 search.addEventListener("input",render);
-
 
 const countryFilter=document.getElementById("countryFilter");
 const sourceFilter=document.getElementById("sourceFilter");
@@ -1665,16 +1597,12 @@ renderYoutubeNews();
 /* PLAYER */
 
 async function playChannel(channel){
-
 currentChannel=channel;
-
 currentIndex=filtered.findIndex(
 x=>x.id===channel.id
 );
-
 player.classList.add("show");
 document.body.style.overflow="hidden";
-
 document.getElementById("playerTitle").textContent=
 "🔴 "+channel.name;
 
@@ -1686,34 +1614,23 @@ if(hls){
 hls.destroy();
 hls=null;
 }
-
 video.pause();
 video.removeAttribute("src");
 video.load();
-
 const url=channel.url;
 
 if(video.canPlayType(
 "application/vnd.apple.mpegurl"
 )){
-
 video.src=url;
-
 video.onloadedmetadata=()=>{
-
 loader.style.display="none";
 status.textContent="🔴 LIVE";
-
 video.play().catch(()=>{});
-
 };
-
 video.onerror=()=>streamError();
-
 }
-
 else if(window.Hls&&Hls.isSupported()){
-
 hls=new Hls({
 enableWorker:true,
 lowLatencyMode:true,
@@ -1723,65 +1640,47 @@ maxMaxBufferLength:40,
 manifestLoadingTimeOut:10000,
 fragLoadingTimeOut:10000
 });
-
 hls.loadSource(url);
 hls.attachMedia(video);
-
 hls.on(
 Hls.Events.MANIFEST_PARSED,
 ()=>{
-
 loader.style.display="none";
 status.textContent="🔴 LIVE";
-
 video.play().catch(()=>{});
-
 }
 );
-
 hls.on(
 Hls.Events.ERROR,
 (event,data)=>{
-
 if(data.fatal)
 streamError();
-
 }
 );
-
 }else{
-
 streamError(
 "এই browser HLS playback support করে না।"
 );
-
 }
-
 }
 
 
 /* ERROR */
 
 function streamError(message){
-
 loader.style.display="grid";
-
 loaderText.textContent="Stream unavailable";
-
 status.textContent=
 message||
 "Stream offline, expired, blocked অথবা browser/CORS restriction থাকতে পারে।";
-
 }
 
 
 /* CONTROLS */
 
 function retry(){
-
 if(currentChannel)
 playChannel(currentChannel);
-
 }
 
 function nextChannel(){
@@ -1790,12 +1689,9 @@ if(document.getElementById("ytPlayerWrap").classList.contains("show")){
   return;
 }
 if(!filtered.length)return;
-
 currentIndex=
 (currentIndex+1)%filtered.length;
-
 playChannel(filtered[currentIndex]);
-
 }
 
 function previousChannel(){
@@ -1804,97 +1700,67 @@ if(document.getElementById("ytPlayerWrap").classList.contains("show")){
   return;
 }
 if(!filtered.length)return;
-
 currentIndex=
 (currentIndex-1+filtered.length)%filtered.length;
-
 playChannel(filtered[currentIndex]);
-
 }
 
 function closePlayer(){
-
 player.classList.remove("show");
-
 document.body.style.overflow="";
-
 video.pause();
-
 if(hls){
 hls.destroy();
 hls=null;
 }
-
 video.removeAttribute("src");
 video.load();
-
 }
 
 function fullscreen(){
-
 if(document.fullscreenElement)
 document.exitFullscreen();
 else
 player.requestFullscreen?.();
-
 }
 
 async function pip(){
-
 try{
-
 if(document.pictureInPictureElement)
 await document.exitPictureInPicture();
 else
 await video.requestPictureInPicture();
-
 }catch(e){
-
 toastMsg("⚠️ PiP unavailable");
-
 }
-
 }
 
 
 /* SHARE */
 
 async function shareCurrent(){
-
 if(!currentChannel)return;
-
 try{
-
 await navigator.share({
 title:currentChannel.name,
 text:"Watch "+currentChannel.name+" on Bangla Live TV Ultra",
 url:location.href
 });
-
 }catch(e){
-
 try{
-
 await navigator.clipboard.writeText(location.href);
 toastMsg("🔗 Link copied");
-
 }catch(x){}
-
 }
-
 }
 
 
 /* VIEW */
 
 function setView(type){
-
 grid.classList.toggle("list",type==="list");
-
 localStorage.setItem("bltu_view",type);
-
 }
-
 setView(
 localStorage.getItem("bltu_view")||"grid"
 );
@@ -1903,27 +1769,18 @@ localStorage.getItem("bltu_view")||"grid"
 /* THEME */
 
 document.getElementById("themeBtn").onclick=()=>{
-
 document.body.classList.toggle("light");
-
 const light=document.body.classList.contains("light");
-
 document.getElementById("themeBtn").textContent=
 light?"🌙":"☀️";
-
 localStorage.setItem(
 "bltu_theme",
 light?"light":"dark"
 );
-
 };
-
 if(localStorage.getItem("bltu_theme")==="light"){
-
 document.body.classList.add("light");
-
 document.getElementById("themeBtn").textContent="🌙";
-
 }
 
 
@@ -1932,7 +1789,6 @@ document.getElementById("themeBtn").textContent="🌙";
 document.getElementById("menuBtn").onclick=()=>{
 document.getElementById("drawer").classList.add("show");
 };
-
 function closeDrawer(){
 document.getElementById("drawer").classList.remove("show");
 }
@@ -1941,26 +1797,19 @@ document.getElementById("drawer").classList.remove("show");
 /* EXPORT */
 
 function exportFavorites(){
-
 const blob=new Blob(
 [
 JSON.stringify(favorites,null,2)
 ],
 {type:"application/json"}
 );
-
 const url=URL.createObjectURL(blob);
-
 const a=document.createElement("a");
-
 a.href=url;
 a.download="bangla-live-favorites.json";
 a.click();
-
 URL.revokeObjectURL(url);
-
 toastMsg("📤 Favorites exported");
-
 }
 
 
@@ -1968,45 +1817,27 @@ toastMsg("📤 Favorites exported");
 
 document.getElementById("importFile")
 .addEventListener("change",event=>{
-
 const file=event.target.files[0];
-
 if(!file)return;
-
 const reader=new FileReader();
-
 reader.onload=()=>{
-
 try{
-
 const data=JSON.parse(reader.result);
-
 if(Array.isArray(data)){
-
 favorites=data;
-
 localStorage.setItem(
 "bltu_favorites",
 JSON.stringify(favorites)
 );
-
 updateStats();
 render();
-
 toastMsg("📥 Favorites imported");
-
 }
-
 }catch(e){
-
 toastMsg("❌ Invalid JSON");
-
 }
-
 };
-
 reader.readAsText(file);
-
 });
 
 
@@ -2017,101 +1848,65 @@ reader.readAsText(file);
 window.addEventListener(
 "beforeinstallprompt",
 event=>{
-
 event.preventDefault();
-
 deferredInstallPrompt=event;
-
 setTimeout(showInstall,2500);
-
 });
 
-
 async function installApp(){
-
 if(deferredInstallPrompt){
-
 deferredInstallPrompt.prompt();
-
 const result=
 await deferredInstallPrompt.userChoice;
-
 console.log(
 "Install result:",
 result.outcome
 );
-
 deferredInstallPrompt=null;
-
 hideInstall();
-
 return;
-
 }
-
 if(
 window.matchMedia("(display-mode: standalone)").matches
 ){
-
 toastMsg("✅ App already installed");
-
 return;
-
 }
-
 if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
-
 toastMsg(
 "📱 Safari → Share → Add to Home Screen"
 );
-
 showInstall();
-
 return;
-
 }
-
 toastMsg(
 "📱 Chrome ⋮ → Install app / Add to Home screen"
 );
-
 showInstall();
-
 }
 
-
 function showInstall(){
-
 document.getElementById(
 "installBox"
 ).classList.add("show");
-
 }
 
-
 function hideInstall(){
-
 document.getElementById(
 "installBox"
 ).classList.remove("show");
-
 }
-
 
 document.getElementById("installNav")
 .onclick=installApp;
 
-
 window.addEventListener(
 "appinstalled",
 ()=>{
-
 hideInstall();
-
 toastMsg(
 "🎉 Bangla Live TV Ultra installed!"
 );
-
 });
 
 
@@ -2121,79 +1916,61 @@ if(
 /iphone|ipad|ipod/i.test(navigator.userAgent) &&
 !window.navigator.standalone
 ){
-
 document.getElementById(
 "iosHelp"
 ).style.display="block";
-
 setTimeout(showInstall,3000);
-
 }
 
 
 /* KEYBOARD */
 
 document.addEventListener("keydown",event=>{
-
 if(event.key==="Escape"){
 if(document.getElementById("ytPlayerWrap").classList.contains("show"))
 closeYoutubePlayer();
-
 if(player.classList.contains("show"))
 closePlayer();
-
 if(
 document.getElementById("drawer")
 .classList.contains("show")
 )
 closeDrawer();
-
 }
-
 if(
 event.key==="ArrowRight" &&
 player.classList.contains("show")
 )
 nextChannel();
-
 if(
 event.key==="ArrowLeft" &&
 player.classList.contains("show")
 )
 previousChannel();
-
 if(event.key==="n"||event.key==="N")
 nextChannel();
-
 if(event.key==="p"||event.key==="P")
 previousChannel();
-
 if(
 event.code==="Space" &&
 player.classList.contains("show")
 ){
-
 event.preventDefault();
-
 video.paused?
 video.play():
 video.pause();
-
 }
-
 });
 
 
 /* SCROLL */
 
 function scrollChannels(){
-
 document.getElementById(
 "channels"
 ).scrollIntoView({
 behavior:"smooth"
 });
-
 }
 
 
